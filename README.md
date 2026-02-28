@@ -10,7 +10,7 @@ cd agents
 ./install.sh
 ```
 
-The install script handles skills and agents but **not** `settings.json` or `CLAUDE.md` since those are personal config that you'll want to customize. Instead of copying blindly, paste this prompt into Claude Code and it'll compare my config with yours, explain the differences and let you pick what to adopt:
+The install script handles skills and agents but **not** [`settings.json`](global/settings.json) or [`CLAUDE.md`](global/CLAUDE.md) since those are personal config that you'll want to customize. Instead of copying blindly, paste this prompt into Claude Code and it'll compare my config with yours, explain the differences and let you pick what to adopt:
 
 ```
 Read the CLAUDE.md and settings.json from the agents repo I just
@@ -21,7 +21,7 @@ explain what it does and why it's useful. Then let me pick which
 ones to add. Apply only what I choose.
 ```
 
-> `CUSTOM.md` is a personality prompt - makes Claude more direct and less corporate. Append it to your `~/.claude/CLAUDE.md` if you want the same vibe.
+> [`CUSTOM.md`](CUSTOM.md) is a personality prompt - makes Claude more direct and less corporate. Append it to your `~/.claude/CLAUDE.md` if you want the same vibe.
 
 ## Dependencies
 
@@ -48,32 +48,46 @@ Skills inherit whatever model your session is using.
 
 | Skill | What it does |
 |---|---|
-| `/cwrap` | Parallel typecheck + lint + test, fix all errors |
-| `/cpr` | Create a PR with auto-generated title and description |
-| `/crebase` | Rebase onto parent branch, resolve conflicts |
-| `/creview` | Review branch diff with severity categories and a verdict |
+| [`/cwrap`](skills/cwrap/SKILL.md) | Parallel typecheck + lint + test, fix all errors |
+| [`/cpr`](skills/cpr/SKILL.md) | Create a PR with auto-generated title and description |
+| [`/crebase`](skills/crebase/SKILL.md) | Rebase onto parent branch, resolve conflicts |
+| [`/creview`](skills/creview/SKILL.md) | Review branch diff with severity categories and a verdict |
 
 **Write**
 
 | Skill | What it does |
 |---|---|
-| `/ctest` | Generate colocated tests for a source file |
-| `/cbatch` | Parallelize a code transformation across many files |
+| [`/ctest`](skills/ctest/SKILL.md) | Generate colocated tests for a source file |
+| [`/cbatch`](skills/cbatch/SKILL.md) | Parallelize a code transformation across many files |
 
 **Explore**
 
 | Skill | What it does |
 |---|---|
-| `/ctrace` | Trace a tRPC call end-to-end |
-| `/cdebug` | Triage a bug report, find root cause, explain and offer a fix |
-| `/clogs` | Find Claude/Twig session log files |
+| [`/ctrace`](skills/ctrace/SKILL.md) | Trace a tRPC call end-to-end |
+| [`/cdebug`](skills/cdebug/SKILL.md) | Triage a bug report, find root cause, explain and offer a fix |
+| [`/clogs`](skills/clogs/SKILL.md) | Find Claude/Twig session log files |
 
 ## Agents
 
 | Agent | Model | What it does |
 |---|---|---|
-| `code-reviewer` | Opus | Reviews diffs for bugs, security, performance and TS strictness |
-| `refactor` | Opus | Analyzes code structure, identifies violations of store/service boundary and applies safe refactors |
+| [`code-reviewer`](agents/code-reviewer.md) | Opus | Reviews diffs for bugs, security, performance and TS strictness |
+| [`refactor`](agents/refactor.md) | Opus | Analyzes code structure, identifies violations of store/service boundary and applies safe refactors |
+
+## Shell Aliases
+
+```bash
+alias cc='claude --dangerously-skip-permissions'
+alias ccw='claude --dangerously-skip-permissions --worktree'
+alias ciaclean='git branch --merged origin/main | grep -vE "^\s*(\*|main|master)" | xargs -n 1 git branch -d'
+```
+
+| Alias | What it does |
+|---|---|
+| `cc` | Launch Claude Code with all permissions |
+| `ccw` | Launch Claude Code with all permissions in a worktree |
+| `ciaclean` | Delete local branches already merged into main ([source](https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html)) |
 
 ## Experimenting with
 
