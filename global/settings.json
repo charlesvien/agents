@@ -7,5 +7,25 @@
   "enabledPlugins": {
     "frontend-design@claude-code-plugins": true
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "permissions": {
+    "allow": [
+      "Bash(fd *)",
+      "Bash(rg *)",
+      "Bash(bat *)",
+      "Bash(tree *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(echo *)",
+      "Bash(pwd)",
+      "Bash(diff *)",
+      "Bash(stat *)",
+      "Bash(du *)",
+      "Bash(readlink *)"
+    ]
+  }
 }
