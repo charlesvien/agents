@@ -75,13 +75,7 @@ Skills inherit whatever model your session is using.
 | [`code-reviewer`](agents/code-reviewer.md) | Opus | Reviews diffs for bugs, security, performance and TS strictness |
 | [`refactor`](agents/refactor.md) | Opus | Analyzes code structure, identifies violations of store/service boundary and applies safe refactors |
 
-## Shell Aliases
-
-```bash
-alias cc='claude --dangerously-skip-permissions'
-alias ccw='claude --dangerously-skip-permissions --worktree'
-alias ciaclean='git branch --merged origin/main | grep -vE "^\s*(\*|main|master)" | xargs -n 1 git branch -d'
-```
+## Shell Commands
 
 | Alias | What it does |
 |---|---|
