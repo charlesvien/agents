@@ -40,16 +40,27 @@ brew install ripgrep fd bat tree
 
 Skills inherit whatever model your session is using.
 
-| Skill | What it does | When to use |
-|---|---|---|
-| `/ctrace` | Trace a tRPC call end-to-end | Before touching unfamiliar code paths |
-| `/ctest` | Generate colocated tests for a source file | After writing or changing a module |
-| `/cwrap` | Parallel typecheck + lint + test, fix all errors | Before committing  - make sure nothing's broken |
-| `/crebase` | Rebase onto parent, resolve conflicts | When your stack falls behind |
-| `/cpr` | Create a Graphite PR with auto-generated title | Ready to ship  - opens the PR for you |
-| `/cscaffold` | Scaffold a new Twig feature | Starting a new feature from scratch |
-| `/clogs` | Find Claude/Twig session log files | Debugging a session or task run |
-| `/cbatch` | Parallelize a code transformation across many files | Migrations, renames and API changes  - e.g. `/cbatch migrate from trpc to orpc` |
+**Ship**
+
+| Skill | What it does |
+|---|---|
+| `/cwrap` | Parallel typecheck + lint + test, fix all errors |
+| `/cpr` | Create a PR with auto-generated title and description |
+| `/crebase` | Rebase onto parent branch, resolve conflicts |
+
+**Write**
+
+| Skill | What it does |
+|---|---|
+| `/ctest` | Generate colocated tests for a source file |
+| `/cbatch` | Parallelize a code transformation across many files |
+
+**Explore**
+
+| Skill | What it does |
+|---|---|
+| `/ctrace` | Trace a tRPC call end-to-end |
+| `/clogs` | Find Claude/Twig session log files |
 
 ## Agents
 
