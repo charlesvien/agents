@@ -4,7 +4,7 @@
 - **Language**: English only. All code, comments, docs, examples, commits, configs, errors and tests.
 - **Style**: Prefer self-documenting code over comments. If you need a comment the code isn't clear enough.
 - **Writing**: No em dashes. No Oxford commas (no comma before "and" in lists).
-- **Tools**: Use `rg` not `grep`, `fd` not `find`, `bat` not `cat`. `tree` is installed.
+- **Tools**: Use `rg` not `grep`, `fd` not `find`, `bat` not `cat`, `delta` for diffs, `fzf` for fuzzy search. `tree` is installed.
 - **Inclusive terms**: allowlist/blocklist, primary/replica, placeholder/example, main branch, conflict-free, concurrent/parallel.
 
 ## Git

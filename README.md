@@ -26,7 +26,7 @@ ones to add. Apply only what I choose.
 The CLAUDE.md tells Claude to use these instead of the defaults. Install via Homebrew:
 
 ```bash
-brew install ripgrep fd bat tree
+brew install ripgrep fd bat tree git-delta fzf
 ```
 
 | Tool | Replaces | Why |
@@ -35,6 +35,8 @@ brew install ripgrep fd bat tree
 | `fd` | `find` | Faster, saner syntax |
 | `bat` | `cat` | Syntax highlighting, line numbers |
 | `tree` | `ls -R` | Visual directory structure |
+| `delta` | `diff` | Syntax-highlighted git diffs |
+| `fzf` | manual searching | Fuzzy find anything - files, branches, history |
 
 ## Skills
 
