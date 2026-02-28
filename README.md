@@ -23,6 +23,7 @@ Symlinks everything into `~/.claude/` alongside your existing skills and agents.
 | `/cpr` | Create a Graphite PR with auto-generated title | Ready to ship — opens the PR for you |
 | `/cscaffold` | Scaffold a new Twig feature | Starting a new feature from scratch |
 | `/clogs` | Find Claude/Twig session log files | Debugging a session or task run |
+| `/cbatch` | Parallelize a code transformation across many files | Migrations, renames, API changes — e.g. `/cbatch migrate from trpc to orpc` |
 
 ## Agents
 
