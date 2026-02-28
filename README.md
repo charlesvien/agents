@@ -21,6 +21,8 @@ explain what it does and why it's useful. Then let me pick which
 ones to add. Apply only what I choose.
 ```
 
+> `CUSTOM.md` is a personality prompt - makes Claude more direct and less corporate. Append it to your `~/.claude/CLAUDE.md` if you want the same vibe.
+
 ## Dependencies
 
 The CLAUDE.md tells Claude to use these instead of the defaults. Install via Homebrew:
