@@ -4,8 +4,6 @@ The skills and agents I use to ship code for PostHog. Built around Graphite stac
 
 ## Setup
 
-Symlinks skills and agents into `~/.claude/`.
-
 ```bash
 git clone https://github.com/charlesvien/agents
 cd agents
@@ -22,6 +20,21 @@ Compare them side by side. For each rule or setting I'm missing,
 explain what it does and why it's useful. Then let me pick which
 ones to add. Apply only what I choose.
 ```
+
+## Dependencies
+
+The CLAUDE.md tells Claude to use these instead of the defaults. Install via Homebrew:
+
+```bash
+brew install ripgrep fd bat tree
+```
+
+| Tool | Replaces | Why |
+|---|---|---|
+| `rg` | `grep` | Faster, respects .gitignore |
+| `fd` | `find` | Faster, saner syntax |
+| `bat` | `cat` | Syntax highlighting, line numbers |
+| `tree` | `ls -R` | Visual directory structure |
 
 ## Skills
 
