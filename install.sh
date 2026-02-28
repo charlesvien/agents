@@ -47,9 +47,6 @@ echo ""
 echo "  Linking skills, agents and config into ~/.claude/"
 echo ""
 
-# CLAUDE.md (global rules)
-link_item "$SCRIPT_DIR/CLAUDE.md" "$HOME/.claude/CLAUDE.md" "CLAUDE.md" "config"
-
 for skill in "$SCRIPT_DIR"/skills/*/; do
   [ -d "$skill" ] || continue
   name="$(basename "$skill")"
