@@ -47,6 +47,7 @@ Skills inherit whatever model your session is using.
 | `/cwrap` | Parallel typecheck + lint + test, fix all errors |
 | `/cpr` | Create a PR with auto-generated title and description |
 | `/crebase` | Rebase onto parent branch, resolve conflicts |
+| `/creview` | Review branch diff with severity categories and a verdict |
 
 **Write**
 
@@ -60,6 +61,7 @@ Skills inherit whatever model your session is using.
 | Skill | What it does |
 |---|---|
 | `/ctrace` | Trace a tRPC call end-to-end |
+| `/cdebug` | Triage a bug report, find root cause, explain and offer a fix |
 | `/clogs` | Find Claude/Twig session log files |
 
 ## Agents
