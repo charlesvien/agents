@@ -57,3 +57,7 @@ Skills inherit whatever model your session is using.
 |---|---|---|
 | `code-reviewer` | Opus | Reviews diffs for bugs, security, performance and TS strictness |
 | `refactor` | Opus | Analyzes code structure, identifies violations of store/service boundary and applies safe refactors |
+
+## Experimenting with
+
+**[RTK](https://github.com/rtk-ai/rtk)** - A Rust CLI that compresses command output before it hits Claude's context window. Claims 60-90% token reduction on common commands by stripping noise from `git status`, test output, etc. Still evaluating this. The token savings are real but I'm wary about stripping context that Opus might need, especially during debugging sessions where full output matters. If you're paying for Opus you probably want it to have as much context as possible to be effective.
