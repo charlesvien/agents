@@ -2,7 +2,7 @@
 name: refactor
 description: Refactoring specialist for the Twig codebase. Analyzes code for structural improvements while respecting existing architecture patterns.
 tools: Read, Grep, Glob, Bash, Edit, Write
-model: sonnet
+model: opus
 memory: user
 ---
 
