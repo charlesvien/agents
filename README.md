@@ -60,4 +60,6 @@ Skills inherit whatever model your session is using.
 
 ## Experimenting with
 
-**[RTK](https://github.com/rtk-ai/rtk)** - A Rust CLI that compresses command output before it hits Claude's context window. Claims 60-90% token reduction on common commands by stripping noise from `git status`, test output, etc. Still evaluating this. The token savings are real but I'm wary about stripping context that Opus might need, especially during debugging sessions where full output matters. If you're paying for Opus you probably want it to have as much context as possible to be effective.
+| Tool | What it does | Status |
+|---|---|---|
+| [RTK](https://github.com/rtk-ai/rtk) | Compresses command output before it hits Claude's context (60-90% token reduction) | Evaluating - token savings are real but wary about stripping context Opus needs during debugging |
