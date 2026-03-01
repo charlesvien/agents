@@ -61,11 +61,34 @@ Minor stylistic or preference items. Examples:
 #### Praise
 Call out things done well. Good patterns, clean abstractions, thoughtful error handling, etc.
 
-### Step 5: Output
+### Step 5: Check test coverage
+
+For each changed file, determine whether tests exist and whether the changes are adequately covered:
+
+1. **Find existing tests**: Look for colocated test files (e.g., `foo.test.ts` next to `foo.ts`) and related test files in `tests/` or `__tests__/` directories.
+2. **Assess coverage of changes**: Check whether the existing tests exercise the new or modified code paths. Look for:
+   - New functions/methods that have no test cases
+   - New branches/conditions that aren't covered
+   - Changed behavior that existing tests don't validate
+   - Edge cases introduced by the changes
+3. **Identify testable code**: Flag code that should have tests but doesn't. Prioritize:
+   - Business logic and data transformations
+   - Utility functions and helpers
+   - State transitions (store actions, reducers)
+   - Error handling paths
+   - Complex conditionals or algorithms
+4. **Skip test suggestions for**: Trivial glue code, type-only changes, simple re-exports, config files and pure UI layout changes with no logic.
+
+### Step 6: Output
 
 Present the review in the categories above. For each item:
 - Reference the file and line number (e.g., `src/main/services/git.ts:42`)
 - Quote the relevant code snippet
 - Explain the issue and suggest a fix
+
+After the categorized feedback, add a **Test Coverage** section:
+- List changed files and whether they have corresponding tests
+- Call out specific functions or code paths that lack test coverage
+- Suggest concrete test cases that would add the most value (describe what to test, not full test code)
 
 End with an overall **Verdict**: one of `Ship it`, `Needs changes` or `Needs discussion`.
