@@ -1,20 +1,19 @@
 ---
 name: cpr
-description: Create a PR from the current branch with auto-generated title and description. Uses Graphite stacked PRs if available, falls back to gh CLI.
+description: Generate a PR title and description from current changes. Pass "commit" to also commit staged/unstaged changes.
 disable-model-invocation: true
 allowed-tools: Bash, Read, Glob, Grep
 ---
 
 ## Instructions
 
-Create a PR for the current branch.
+Generate a PR title and description based on the current branch's changes relative to the parent branch.
 
-### Step 1: Pre-flight checks
+**Arguments:**
+- No arguments (default): analyze changes and display a suggested PR title + description. Do NOT commit, push, or create a PR.
+- `commit`: analyze changes, stage everything, commit with the generated title, then display the PR title + description. Do NOT push.
 
-1. Run `git status` to check for uncommitted changes
-2. If there are uncommitted changes, show them and **stop** — tell the user to commit first (suggest running `/cwrap` then committing)
-
-### Step 2: Detect parent branch and tooling
+### Step 1: Detect parent branch and tooling
 
 Determine whether Graphite is available and tracking this branch:
 
@@ -26,15 +25,21 @@ Determine whether Graphite is available and tracking this branch:
    - Use `git merge-base HEAD origin/main` to find the fork point
    - Use `origin/main` as the parent
 
-### Step 3: Analyze the diff
+### Step 2: Gather all changes
 
-1. Run `git diff <parent>...HEAD` to get the full diff
-2. Run `git log <parent>..HEAD --oneline` to see commit history
-3. Understand what changed and why
+Collect the full picture of what has changed:
 
-### Step 4: Generate PR metadata
+1. Run `git status` to see staged, unstaged and untracked files
+2. Run `git diff` for unstaged changes
+3. Run `git diff --cached` for staged changes
+4. Run `git diff <parent>...HEAD` for already-committed changes vs parent
+5. Run `git log <parent>..HEAD --oneline` for commit history
 
-Based on the diff analysis:
+Combine all of this to understand the full set of changes relative to the parent.
+
+### Step 3: Generate PR metadata
+
+Based on the full change analysis:
 
 - **Title**: Concise, under 70 characters, conventional format (e.g., `feat(auth): add token refresh on expiry`)
 - **Description**: An ordered list of changes, 3-6 items max, short phrases not full sentences. Example:
@@ -44,28 +49,31 @@ Based on the diff analysis:
   3. Fix spinner not dismissing on error
   ```
 
-### Step 5: Create the PR
+### Step 4: Commit (only if argument is "commit")
 
-**If Graphite is available:**
-```bash
-gt create --title "<title>" --message "$(cat <<'EOF'
-<description>
-EOF
-)"
-```
-Then tell the user to run `gt submit` when ready to push. Do NOT run `gt submit` yourself.
+If the user passed `commit`:
 
-**If using plain git:**
-```bash
-git push -u origin HEAD
-gh pr create --title "<title>" --body "$(cat <<'EOF'
-<description>
-EOF
-)"
-```
+1. Stage all changes: `git add -A`
+2. Commit using the generated title as the commit message:
+   ```bash
+   git commit -m "$(cat <<'EOF'
+   <title>
+   EOF
+   )"
+   ```
+3. Do NOT push. Do NOT create a PR.
 
-### Step 6: Output
+If no argument was passed, skip this step entirely.
 
-Show the user:
-- The PR title and description you used
-- The stack position (if using Graphite) or the PR URL (if using gh)
+### Step 5: Output
+
+Always show the user:
+- **PR Title**: the generated title
+- **PR Description**: the generated description
+- Stack position if Graphite is active
+
+If `commit` was used, confirm the commit was created.
+
+If default mode (no commit), tell the user they can:
+- Run `/cpr commit` to commit with this title
+- Run `gt submit` (Graphite) or `git push -u origin HEAD && gh pr create` (plain git) when ready to create the PR
