@@ -1,13 +1,13 @@
 ---
 name: cpr
-description: Generate a PR title and description from current changes. Pass "commit" to also commit staged/unstaged changes.
+description: Generate PR title and description from uncommitted changes (or branch diff if clean). Pass "commit" to also commit.
 disable-model-invocation: true
 allowed-tools: Bash, Read, Glob, Grep
 ---
 
 ## Instructions
 
-Generate a PR title and description based on the current branch's changes relative to the parent branch.
+Generate a PR title and description from uncommitted changes or branch commits.
 
 **Arguments:**
 - No arguments (default): analyze changes and display a suggested PR title + description. Do NOT commit, push, or create a PR.
@@ -25,21 +25,25 @@ Determine whether Graphite is available and tracking this branch:
    - Use `git merge-base HEAD origin/main` to find the fork point
    - Use `origin/main` as the parent
 
-### Step 2: Gather all changes
-
-Collect the full picture of what has changed:
+### Step 2: Gather changes and determine changeset
 
 1. Run `git status` to see staged, unstaged and untracked files
 2. Run `git diff` for unstaged changes
 3. Run `git diff --cached` for staged changes
-4. Run `git diff <parent>...HEAD` for already-committed changes vs parent
-5. Run `git log <parent>..HEAD --oneline` for commit history
 
-Combine all of this to understand the full set of changes relative to the parent.
+**If there are any uncommitted changes** (staged, unstaged or untracked files):
+- These are the changeset. Generate the PR title and description from these changes only.
+- Do NOT look at committed changes vs parent. The uncommitted work is what the user wants to describe.
+
+**If there are no uncommitted changes** (clean working tree):
+- Fall back to the branch's committed changes vs parent.
+- Run `git diff <parent>...HEAD` for the diff
+- Run `git log <parent>..HEAD --oneline` for commit history
+- Generate the PR title and description from these.
 
 ### Step 3: Generate PR metadata
 
-Based on the full change analysis:
+Based on the changeset from Step 2:
 
 - **Title**: Concise, under 70 characters, conventional format (e.g., `feat(auth): add token refresh on expiry`)
 - **Description**: An ordered list of changes, 3-6 items max, short phrases not full sentences. Example:

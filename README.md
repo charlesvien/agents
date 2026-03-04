@@ -49,7 +49,7 @@ Skills inherit whatever model your session is using.
 | Skill | What it does |
 |---|---|
 | [`/cwrap`](skills/cwrap/SKILL.md) | Parallel typecheck + lint + test, fix all errors |
-| [`/cpr`](skills/cpr/SKILL.md) | Create a PR with auto-generated title and description |
+| [`/cpr`](skills/cpr/SKILL.md) | Generate PR title and description from uncommitted changes (or branch diff if clean) |
 | [`/crebase`](skills/crebase/SKILL.md) | Rebase onto parent branch, resolve conflicts |
 | [`/creview`](skills/creview/SKILL.md) | Review branch diff with severity categories and a verdict |
 
