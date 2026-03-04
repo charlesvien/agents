@@ -72,13 +72,6 @@ Skills inherit whatever model your session is using.
 | [`/cdebug`](skills/cdebug/SKILL.md) | Triage a bug report, find root cause, explain and offer a fix |
 | [`/clogs`](skills/clogs/SKILL.md) | Find Claude/Twig session log files |
 
-**Loops**
-
-| Skill | What it does |
-|---|---|
-| [`/cloop`](skills/cloop/SKILL.md) | Self-referential dev loop -- feeds output back as input until completion promise is met |
-| [`/ccancel`](skills/ccancel/SKILL.md) | Cancel an active cloop |
-
 ## Hooks
 
 Configured in [`global/settings.json`](global/settings.json):
@@ -86,7 +79,6 @@ Configured in [`global/settings.json`](global/settings.json):
 | Hook | Event | What it does |
 |---|---|---|
 | [`suggest-compact.js`](scripts/suggest-compact.js) | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
-| [`stop-hook.sh`](skills/cloop/hooks/stop-hook.sh) | Stop | Powers cloop -- blocks exit and feeds the same prompt back for the next iteration |
 
 ## Agents
 
@@ -107,6 +99,7 @@ Configured in [`global/settings.json`](global/settings.json):
 
 | Tool | What it does | Status |
 |---|---|---|
+| [Ralph](https://github.com/rtk-ai/ralph) | Autonomous agent loop -- PRD-driven task execution with iteration | Using for looping workflows instead of custom cloop |
 | [RTK](https://github.com/rtk-ai/rtk) | Compresses command output before it hits Claude's context (60-90% token reduction) | Evaluating - token savings are real but wary about stripping context Opus needs during debugging |
 
 ## Attribution

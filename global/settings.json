@@ -16,16 +16,6 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/skills/cloop/hooks/stop-hook.sh"
-          }
-        ]
-      }
     ]
   },
   "spinnerVerbs": {
