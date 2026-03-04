@@ -95,6 +95,8 @@ Configured in [`global/settings.json`](global/settings.json):
 | `ccw` | Launch Claude Code with all permissions in a worktree |
 | `ciaclean` | Delete local branches already merged into main ([source](https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html)) |
 
+> Copyable aliases in [`global/aliases.sh`](global/aliases.sh). Source it from your `.zshrc` or cherry-pick what you want.
+
 ## Experimenting with
 
 | Tool | What it does | Status |
