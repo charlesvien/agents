@@ -110,3 +110,7 @@ Configured in [`global/settings.json`](global/settings.json):
 | Tool | What it does | Status |
 |---|---|---|
 | [RTK](https://github.com/rtk-ai/rtk) | Compresses command output before it hits Claude's context (60-90% token reduction) | Evaluating - token savings are real but wary about stripping context Opus needs during debugging |
+
+## Attribution
+
+Some skills and agents adapted from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) by [@affaan-m](https://github.com/affaan-m).
