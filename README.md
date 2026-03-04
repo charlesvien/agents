@@ -99,7 +99,6 @@ Configured in [`global/settings.json`](global/settings.json):
 
 | Tool | What it does | Status |
 |---|---|---|
-| [Ralph](https://github.com/rtk-ai/ralph) | Autonomous agent loop -- PRD-driven task execution with iteration | Using for looping workflows instead of custom cloop |
 | [RTK](https://github.com/rtk-ai/rtk) | Compresses command output before it hits Claude's context (60-90% token reduction) | Evaluating - token savings are real but wary about stripping context Opus needs during debugging |
 
 ## Attribution
