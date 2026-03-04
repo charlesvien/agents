@@ -45,7 +45,8 @@ Determine whether Graphite is available and tracking this branch:
 
 Based on the changeset from Step 2:
 
-- **Title**: Concise, under 70 characters, conventional format. Capitalize the first letter after the prefix (e.g., `feat(auth): Add token refresh on expiry`)
+- **PR Title**: Concise, under 70 characters, conventional format `<type>(<scope>): <subject>`. Capitalize the first letter after the prefix (e.g., `feat(auth): Add token refresh on expiry`)
+- **Commit message**: Plain imperative subject, no type prefix (e.g., `add token refresh on expiry`). Used only when committing in Step 4.
 - **Description**: An ordered list of changes, 3-6 items max, short phrases not full sentences. Example:
   ```
   1. Add retry logic for stale session resume
@@ -58,10 +59,10 @@ Based on the changeset from Step 2:
 If the user passed `commit`:
 
 1. Stage all changes: `git add -A`
-2. Commit using the generated title as the commit message:
+2. Commit using the **commit message** (plain, no type prefix):
    ```bash
    git commit -m "$(cat <<'EOF'
-   <title>
+   <commit message>
    EOF
    )"
    ```
@@ -72,7 +73,7 @@ If no argument was passed, skip this step entirely.
 ### Step 5: Output
 
 Always show the user:
-- **PR Title**: the generated title
+- **PR Title**: the generated PR title (conventional format with type prefix)
 - **PR Description**: the generated description
 - Stack position if Graphite is active
 

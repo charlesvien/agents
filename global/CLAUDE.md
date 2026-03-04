@@ -10,6 +10,7 @@
 ## Git
 
 - **Branches**: Conventional prefix `<type>/<short-description>`. Types: feat, fix, docs, style, refactor, test, chore, perf.
+- **PR titles**: Conventional format `<type>(<scope>): <subject>` (e.g., `feat(auth): Add token refresh on expiry`).
 - **Commits**: Plain imperative subject, 50 chars max ("add login page" not "added login page"). No type prefixes. No period. Single-line only unless I ask otherwise. No attribution.
 - **Stacked PRs**: I use Graphite (`gt`). Always diff against the parent branch, not trunk. Use `gt branch info` to find the parent.
 - **Atomic commits**: One logical change per commit. Split if addressing different concerns.
