@@ -45,7 +45,7 @@ Determine whether Graphite is available and tracking this branch:
 
 Based on the changeset from Step 2:
 
-- **Title**: Concise, under 70 characters, conventional format (e.g., `feat(auth): add token refresh on expiry`)
+- **Title**: Concise, under 70 characters, conventional format. Capitalize the first letter after the prefix (e.g., `feat(auth): Add token refresh on expiry`)
 - **Description**: An ordered list of changes, 3-6 items max, short phrases not full sentences. Example:
   ```
   1. Add retry logic for stale session resume
