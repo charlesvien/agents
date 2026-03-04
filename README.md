@@ -48,6 +48,7 @@ Skills inherit whatever model your session is using.
 
 | Skill | What it does |
 |---|---|
+| [`/ccheckpoint`](skills/ccheckpoint/SKILL.md) | Create, verify or list workflow checkpoints tied to git SHAs |
 | [`/cverify`](skills/cverify/SKILL.md) | Parallel typecheck + lint + build + test, fix all errors |
 | [`/cpr`](skills/cpr/SKILL.md) | Generate PR title and description from uncommitted changes (or branch diff if clean) |
 | [`/crebase`](skills/crebase/SKILL.md) | Rebase onto parent branch, resolve conflicts |
@@ -92,12 +93,6 @@ Configured in [`global/settings.json`](global/settings.json):
 |---|---|---|
 | [`code-reviewer`](agents/code-reviewer.md) | Opus | Reviews diffs for bugs, security, performance and TS strictness |
 | [`refactor-cleaner`](agents/refactor-cleaner.md) | Sonnet | Dead code cleanup -- runs knip/depcheck/ts-prune to find unused code, deps and exports then safely removes them |
-
-## Commands
-
-| Command | What it does |
-|---|---|
-| [`/checkpoint`](commands/checkpoint.md) | Create, verify or list workflow checkpoints tied to git SHAs |
 
 ## Shell Commands
 
