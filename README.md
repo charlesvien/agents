@@ -48,10 +48,11 @@ Skills inherit whatever model your session is using.
 
 | Skill | What it does |
 |---|---|
-| [`/cwrap`](skills/cwrap/SKILL.md) | Parallel typecheck + lint + test, fix all errors |
+| [`/cverify`](skills/cverify/SKILL.md) | Parallel typecheck + lint + build + test, fix all errors |
 | [`/cpr`](skills/cpr/SKILL.md) | Generate PR title and description from uncommitted changes (or branch diff if clean) |
 | [`/crebase`](skills/crebase/SKILL.md) | Rebase onto parent branch, resolve conflicts |
 | [`/creview`](skills/creview/SKILL.md) | Review branch diff with severity categories and a verdict |
+| [`/verification-loop`](skills/verification-loop/SKILL.md) | Full pre-PR gate: build, typecheck, lint, test, security scan and code review in one pass |
 
 **Write**
 
@@ -68,12 +69,36 @@ Skills inherit whatever model your session is using.
 | [`/cdebug`](skills/cdebug/SKILL.md) | Triage a bug report, find root cause, explain and offer a fix |
 | [`/clogs`](skills/clogs/SKILL.md) | Find Claude/Twig session log files |
 
+**Loops**
+
+| Skill | What it does |
+|---|---|
+| [`/ralph-loop`](skills/ralph-loop/ralph-loop.md) | Self-referential dev loop -- feeds output back as input until completion promise is met |
+| [`/cancel-ralph`](skills/ralph-loop/cancel-ralph.md) | Cancel an active ralph loop |
+| [`/strategic-compact`](skills/strategic-compact/SKILL.md) | Suggests manual `/compact` at logical phase transitions instead of arbitrary auto-compaction |
+
+## Hooks
+
+Configured in [`global/settings.json`](global/settings.json):
+
+| Hook | Event | What it does |
+|---|---|---|
+| `suggest-compact.js` | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
+| `stop-hook.sh` | Stop | Powers the ralph loop -- blocks exit and feeds the same prompt back for the next iteration |
+
 ## Agents
 
 | Agent | Model | What it does |
 |---|---|---|
 | [`code-reviewer`](agents/code-reviewer.md) | Opus | Reviews diffs for bugs, security, performance and TS strictness |
 | [`refactor`](agents/refactor.md) | Opus | Analyzes code structure, identifies violations of store/service boundary and applies safe refactors |
+| [`refactor-cleaner`](agents/refactor-cleaner.md) | Sonnet | Dead code cleanup -- runs knip/depcheck/ts-prune to find unused code, deps and exports then safely removes them |
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| [`/checkpoint`](.claude/commands/checkpoint.md) | Create, verify or list workflow checkpoints tied to git SHAs |
 
 ## Shell Commands
 
