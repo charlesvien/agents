@@ -97,7 +97,7 @@ Configured in [`global/settings.json`](global/settings.json):
 
 | Command | What it does |
 |---|---|
-| [`/checkpoint`](.claude/commands/checkpoint.md) | Create, verify or list workflow checkpoints tied to git SHAs |
+| [`/checkpoint`](commands/checkpoint.md) | Create, verify or list workflow checkpoints tied to git SHAs |
 
 ## Shell Commands
 

@@ -59,7 +59,7 @@ for agent in "$SCRIPT_DIR"/agents/*.md; do
   link_item "$agent" "$HOME/.claude/agents/$name" "$name" "agent"
 done
 
-for cmd in "$SCRIPT_DIR"/.claude/commands/*.md; do
+for cmd in "$SCRIPT_DIR"/commands/*.md; do
   [ -f "$cmd" ] || continue
   name="$(basename "$cmd")"
   link_item "$cmd" "$HOME/.claude/commands/$name" "$name" "command"
