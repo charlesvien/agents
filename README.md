@@ -1,5 +1,8 @@
 # 🤖 Charles' Agentic Workflow
 
+> [!IMPORTANT]
+> Includes hedgehog spinner verbs. Your Claude will snuffle, waddle and quill-check everything.
+
 The skills and agents I use to ship code for PostHog. Built around Graphite stacked PRs and the PostHog Code ecosystem.
 
 ## Setup
