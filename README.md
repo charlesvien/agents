@@ -86,7 +86,7 @@ Configured in [`global/settings.json`](global/settings.json):
 | Hook | Event | What it does |
 |---|---|---|
 | [`suggest-compact.js`](scripts/suggest-compact.js) | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
-| `stop-hook.sh` | Stop | Powers cloop -- blocks exit and feeds the same prompt back for the next iteration |
+| [`stop-hook.sh`](skills/cloop/hooks/stop-hook.sh) | Stop | Powers cloop -- blocks exit and feeds the same prompt back for the next iteration |
 
 ## Agents
 
