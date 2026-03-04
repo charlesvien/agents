@@ -1,5 +1,5 @@
 ---
-name: cbatch
+name: crefactor
 description: Parallelize a straightforward code transformation across many files (migrations, renames, pattern replacements)
 disable-model-invocation: true
 allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Task

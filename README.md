@@ -59,7 +59,7 @@ Skills inherit whatever model your session is using.
 | Skill | What it does |
 |---|---|
 | [`/ctest`](skills/ctest/SKILL.md) | Generate colocated tests for a source file |
-| [`/cbatch`](skills/cbatch/SKILL.md) | Parallelize a code transformation across many files |
+| [`/crefactor`](skills/crefactor/SKILL.md) | Parallelize a code transformation across many files |
 
 **Explore**
 
