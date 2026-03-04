@@ -4,10 +4,54 @@
     "pr": ""
   },
   "model": "opus",
-  "enabledPlugins": {
-    "frontend-design@claude-code-plugins": true
-  },
   "skipDangerousModePermissionPrompt": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/strategic-compact/suggest-compact.js"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/skills/ralph-loop/hooks/stop-hook.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Curling into a ball",
+      "Snuffling around",
+      "Foraging for bugs",
+      "Rolling through hedgerows",
+      "Nibbling on mealworms",
+      "Waddling purposefully",
+      "Bristling with excitement",
+      "Burrowing into leaves",
+      "Scurrying through undergrowth",
+      "Unfurling cautiously",
+      "Sniffing out answers",
+      "Huffing and puffing",
+      "Nesting in code",
+      "Tumbling down hills",
+      "Quill-checking everything"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-code-plugins": true,
+    "ralph-skills@ralph-marketplace": true
+  },
   "permissions": {
     "allow": [
       "Bash(fd *)",
