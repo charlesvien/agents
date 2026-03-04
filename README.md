@@ -73,9 +73,9 @@ Skills inherit whatever model your session is using.
 
 | Skill | What it does |
 |---|---|
-| [`/ralph-loop`](skills/ralph-loop/ralph-loop.md) | Self-referential dev loop -- feeds output back as input until completion promise is met |
-| [`/cancel-ralph`](skills/ralph-loop/cancel-ralph.md) | Cancel an active ralph loop |
-| [`/strategic-compact`](skills/strategic-compact/SKILL.md) | Suggests manual `/compact` at logical phase transitions instead of arbitrary auto-compaction |
+| [`/cloop`](skills/cloop/SKILL.md) | Self-referential dev loop -- feeds output back as input until completion promise is met |
+| [`/ccancel`](skills/ccancel/SKILL.md) | Cancel an active cloop |
+| [`/ccompact`](skills/ccompact/SKILL.md) | Suggests manual `/compact` at logical phase transitions instead of arbitrary auto-compaction |
 
 ## Hooks
 
@@ -84,7 +84,7 @@ Configured in [`global/settings.json`](global/settings.json):
 | Hook | Event | What it does |
 |---|---|---|
 | `suggest-compact.js` | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
-| `stop-hook.sh` | Stop | Powers the ralph loop -- blocks exit and feeds the same prompt back for the next iteration |
+| `stop-hook.sh` | Stop | Powers cloop -- blocks exit and feeds the same prompt back for the next iteration |
 
 ## Agents
 

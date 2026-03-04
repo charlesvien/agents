@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Ralph Loop Setup Script
-# Creates state file for in-session Ralph loop
+# Loop Setup Script
+# Creates state file for in-session Loop
 
 set -euo pipefail
 
@@ -15,10 +15,10 @@ while [[ $# -gt 0 ]]; do
   case $1 in
     -h|--help)
       cat << 'HELP_EOF'
-Ralph Loop - Interactive self-referential development loop
+Loop - Interactive self-referential development loop
 
 USAGE:
-  /ralph-loop [PROMPT...] [OPTIONS]
+  /cloop [PROMPT...] [OPTIONS]
 
 ARGUMENTS:
   PROMPT...    Initial prompt to start the loop (can be multiple words without quotes)
@@ -29,7 +29,7 @@ OPTIONS:
   -h, --help                     Show this help message
 
 DESCRIPTION:
-  Starts a Ralph Wiggum loop in your CURRENT session. The stop hook prevents
+  Starts a cloop in your CURRENT session. The stop hook prevents
   exit and feeds your output back as input until completion or iteration limit.
 
   To signal completion, you must output: <promise>YOUR_PHRASE</promise>
@@ -37,24 +37,24 @@ DESCRIPTION:
   Use this for:
   - Interactive iteration where you want to see progress
   - Tasks requiring self-correction and refinement
-  - Learning how Ralph works
+  - Learning how cloop works
 
 EXAMPLES:
-  /ralph-loop Build a todo API --completion-promise 'DONE' --max-iterations 20
-  /ralph-loop --max-iterations 10 Fix the auth bug
-  /ralph-loop Refactor cache layer  (runs forever)
-  /ralph-loop --completion-promise 'TASK COMPLETE' Create a REST API
+  /cloop Build a todo API --completion-promise 'DONE' --max-iterations 20
+  /cloop --max-iterations 10 Fix the auth bug
+  /cloop Refactor cache layer  (runs forever)
+  /cloop --completion-promise 'TASK COMPLETE' Create a REST API
 
 STOPPING:
   Only by reaching --max-iterations or detecting --completion-promise
-  No manual stop - Ralph runs infinitely by default!
+  No manual stop - cloop runs infinitely by default!
 
 MONITORING:
   # View current iteration:
-  grep '^iteration:' .claude/ralph-loop.local.md
+  grep '^iteration:' .claude/cloop.local.md
 
   # View full state:
-  head -10 .claude/ralph-loop.local.md
+  head -10 .claude/cloop.local.md
 HELP_EOF
       exit 0
       ;;
@@ -116,14 +116,14 @@ PROMPT="${PROMPT_PARTS[*]}"
 if [[ -z "$PROMPT" ]]; then
   echo "❌ Error: No prompt provided" >&2
   echo "" >&2
-  echo "   Ralph needs a task description to work on." >&2
+  echo "   cloop needs a task description to work on." >&2
   echo "" >&2
   echo "   Examples:" >&2
-  echo "     /ralph-loop Build a REST API for todos" >&2
-  echo "     /ralph-loop Fix the auth bug --max-iterations 20" >&2
-  echo "     /ralph-loop --completion-promise 'DONE' Refactor code" >&2
+  echo "     /cloop Build a REST API for todos" >&2
+  echo "     /cloop Fix the auth bug --max-iterations 20" >&2
+  echo "     /cloop --completion-promise 'DONE' Refactor code" >&2
   echo "" >&2
-  echo "   For all options: /ralph-loop --help" >&2
+  echo "   For all options: /cloop --help" >&2
   exit 1
 fi
 
@@ -137,7 +137,7 @@ else
   COMPLETION_PROMISE_YAML="null"
 fi
 
-cat > .claude/ralph-loop.local.md <<EOF
+cat > .claude/cloop.local.md <<EOF
 ---
 active: true
 iteration: 1
@@ -151,7 +151,7 @@ EOF
 
 # Output setup message
 cat <<EOF
-🔄 Ralph loop activated in this session!
+🔄 Loop activated in this session!
 
 Iteration: 1
 Max iterations: $(if [[ $MAX_ITERATIONS -gt 0 ]]; then echo $MAX_ITERATIONS; else echo "unlimited"; fi)
@@ -161,7 +161,7 @@ The stop hook is now active. When you try to exit, the SAME PROMPT will be
 fed back to you. You'll see your previous work in files, creating a
 self-referential loop where you iteratively improve on the same task.
 
-To monitor: head -10 .claude/ralph-loop.local.md
+To monitor: head -10 .claude/cloop.local.md
 
 ⚠️  WARNING: This loop cannot be stopped manually! It will run infinitely
     unless you set --max-iterations or --completion-promise.
@@ -179,7 +179,7 @@ fi
 if [[ "$COMPLETION_PROMISE" != "null" ]]; then
   echo ""
   echo "═══════════════════════════════════════════════════════════"
-  echo "CRITICAL - Ralph Loop Completion Promise"
+  echo "CRITICAL - Loop Completion Promise"
   echo "═══════════════════════════════════════════════════════════"
   echo ""
   echo "To complete this loop, output this EXACT text:"

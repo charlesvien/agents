@@ -12,7 +12,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ~/.claude/skills/strategic-compact/suggest-compact.js"
+            "command": "node ~/.claude/skills/ccompact/suggest-compact.js"
           }
         ]
       }
@@ -22,7 +22,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/skills/ralph-loop/hooks/stop-hook.sh"
+            "command": "~/.claude/skills/cloop/hooks/stop-hook.sh"
           }
         ]
       }
