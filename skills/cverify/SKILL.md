@@ -1,5 +1,5 @@
 ---
-name: cwrap
+name: cverify
 description: Run typecheck, lint, build, and test in parallel — fix all errors until everything passes
 disable-model-invocation: true
 allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Agent
