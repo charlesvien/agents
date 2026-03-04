@@ -91,7 +91,6 @@ Configured in [`global/settings.json`](global/settings.json):
 | Agent | Model | What it does |
 |---|---|---|
 | [`code-reviewer`](agents/code-reviewer.md) | Opus | Reviews diffs for bugs, security, performance and TS strictness |
-| [`refactor`](agents/refactor.md) | Opus | Analyzes code structure, identifies violations of store/service boundary and applies safe refactors |
 | [`refactor-cleaner`](agents/refactor-cleaner.md) | Sonnet | Dead code cleanup -- runs knip/depcheck/ts-prune to find unused code, deps and exports then safely removes them |
 
 ## Commands
