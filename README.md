@@ -52,11 +52,10 @@ Skills inherit whatever model your session is using.
 | Skill | What it does |
 |---|---|
 | [`/ccheckpoint`](skills/ccheckpoint/SKILL.md) | Create, verify or list workflow checkpoints tied to git SHAs |
-| [`/cverify`](skills/cverify/SKILL.md) | Parallel typecheck + lint + build + test, fix all errors |
+| [`/cwrap`](skills/cwrap/SKILL.md) | Parallel typecheck + lint + build + test, fix all errors in a loop |
 | [`/cpr`](skills/cpr/SKILL.md) | Generate PR title and description from uncommitted changes (or branch diff if clean) |
 | [`/crebase`](skills/crebase/SKILL.md) | Rebase onto parent branch, resolve conflicts |
 | [`/creview`](skills/creview/SKILL.md) | Review branch diff with severity categories and a verdict |
-| [`/verification-loop`](skills/verification-loop/SKILL.md) | Full pre-PR gate: build, typecheck, lint, test, security scan and code review in one pass |
 
 **Write**
 
@@ -79,7 +78,6 @@ Skills inherit whatever model your session is using.
 |---|---|
 | [`/cloop`](skills/cloop/SKILL.md) | Self-referential dev loop -- feeds output back as input until completion promise is met |
 | [`/ccancel`](skills/ccancel/SKILL.md) | Cancel an active cloop |
-| [`/ccompact`](skills/ccompact/SKILL.md) | Suggests manual `/compact` at logical phase transitions instead of arbitrary auto-compaction |
 
 ## Hooks
 
@@ -87,7 +85,7 @@ Configured in [`global/settings.json`](global/settings.json):
 
 | Hook | Event | What it does |
 |---|---|---|
-| `suggest-compact.js` | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
+| [`suggest-compact.js`](scripts/suggest-compact.js) | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
 | `stop-hook.sh` | Stop | Powers cloop -- blocks exit and feeds the same prompt back for the next iteration |
 
 ## Agents

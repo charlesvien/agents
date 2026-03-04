@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Code review subagent. Designed to be called from cverify or standalone. Reviews the branch diff for bugs, security and correctness.
+description: Code review subagent. Designed to be called from cwrap or standalone. Reviews the branch diff for bugs, security and correctness.
 tools: Read, Grep, Glob, Bash
 model: opus
 ---

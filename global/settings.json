@@ -12,7 +12,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ~/.claude/skills/ccompact/suggest-compact.js"
+            "command": "node ~/.claude/scripts/suggest-compact.js"
           }
         ]
       }

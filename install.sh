@@ -10,7 +10,7 @@ YELLOW='\033[33m'
 DIM='\033[2m'
 RESET='\033[0m'
 
-mkdir -p ~/.claude/skills ~/.claude/agents
+mkdir -p ~/.claude/skills ~/.claude/agents ~/.claude/scripts
 
 new=0
 existing=0
@@ -44,7 +44,7 @@ link_item() {
 }
 
 echo ""
-echo "  Linking skills and agents into ~/.claude/"
+echo "  Linking skills, agents and scripts into ~/.claude/"
 echo ""
 
 for skill in "$SCRIPT_DIR"/skills/*/; do
@@ -57,6 +57,12 @@ for agent in "$SCRIPT_DIR"/agents/*.md; do
   [ -f "$agent" ] || continue
   name="$(basename "$agent")"
   link_item "$agent" "$HOME/.claude/agents/$name" "$name" "agent"
+done
+
+for script in "$SCRIPT_DIR"/scripts/*; do
+  [ -f "$script" ] || continue
+  name="$(basename "$script")"
+  link_item "$script" "$HOME/.claude/scripts/$name" "$name" "script"
 done
 
 echo ""
