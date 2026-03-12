@@ -24,8 +24,11 @@ extensions=(
 echo "Setting $EDITOR_BUNDLE_ID as default for ${#extensions[@]} extensions..."
 
 for ext in "${extensions[@]}"; do
-  duti -s "$EDITOR_BUNDLE_ID" "$ext" all
-  echo "  $ext"
+  if duti -s "$EDITOR_BUNDLE_ID" "$ext" all 2>/dev/null; then
+    echo "  $ext"
+  else
+    echo "  $ext (skipped — macOS restricted)"
+  fi
 done
 
 echo "Done."
