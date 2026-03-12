@@ -10,7 +10,7 @@ The skills and agents I use to ship code for PostHog. Built around Graphite stac
 ```bash
 git clone https://github.com/charlesvien/agents
 cd agents
-./install.sh
+./scripts/install.sh
 ```
 
 The install script handles skills and agents but **not** [`settings.json`](global/settings.json) or [`CLAUDE.md`](global/CLAUDE.md) since those are personal config that you'll want to customize. Instead of copying blindly, paste this prompt into Claude Code and it'll compare my config with yours, explain the differences and let you pick what to adopt:

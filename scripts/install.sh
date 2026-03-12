@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 GREEN='\033[32m'
 YELLOW='\033[33m'
 DIM='\033[2m'
