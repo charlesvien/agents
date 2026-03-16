@@ -1,17 +1,33 @@
 ---
 name: creview
-description: Review the code changes on the current branch and bucket feedback into severity categories
+description: Review code changes on the current branch or a GitHub PR URL
 disable-model-invocation: true
 allowed-tools: Bash, Read, Glob, Grep, Task
 ---
 
 ## Instructions
 
-Review the **holistic diff** of the current branch against its **parent branch**. You are reviewing the branch as a single unit of work - NOT individual commits.
+Review the **holistic diff** of a branch as a single unit of work - NOT individual commits.
 
 **IMPORTANT: Do NOT review individual commits. Do NOT run `git log` to analyze commit-by-commit changes. The only diff that matters is the full diff between the parent branch and HEAD. Treat the branch as one atomic changeset.**
 
+### Step 0: Resolve target
+
+Check if `$ARGUMENTS` contains a GitHub URL (matching `github.com/.+/pull/\d+`).
+
+**If a GitHub PR URL was provided:**
+
+1. Save the current branch name: `git rev-parse --abbrev-ref HEAD`
+2. Run `gh pr view <URL> --json headRefName,baseRefName` to get the PR's head and base branches
+3. Run `gh pr checkout <URL>` to check out the PR branch locally
+4. Use the base branch from the PR JSON as the parent branch
+5. After the review is complete, switch back to the original branch: `git checkout <saved-branch>`
+
+**If no URL was provided:** proceed to Step 1 as normal.
+
 ### Step 1: Detect parent branch
+
+Skip this step if a GitHub PR URL was provided (parent was already resolved in Step 0).
 
 1. Run `gt branch info` to check if Graphite manages this branch
 2. **If Graphite is available:**
