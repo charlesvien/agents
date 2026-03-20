@@ -47,8 +47,10 @@ Based on the changeset from Step 2:
 
 - **PR Title**: Concise, under 70 characters, conventional format `<type>(<scope>): <subject>`. Capitalize the first letter after the prefix (e.g., `feat(auth): Add token refresh on expiry`)
 - **Commit message**: Plain imperative subject, no type prefix (e.g., `add token refresh on expiry`). Used only when committing in Step 4.
-- **Description**: An ordered list of changes, 3-6 items max, short phrases not full sentences. Example:
+- **Description**: A one-line problem statement followed by an ordered list of changes, 3-6 items max, short phrases not full sentences. The problem statement explains *why* the change exists — what was broken, missing or needed. Example:
   ```
+  Session resume silently fails on stale connections, leaving users stuck on a loading screen.
+
   1. Add retry logic for stale session resume
   2. Show "New Session" button on connection failure
   3. Fix spinner not dismissing on error
