@@ -31,7 +31,7 @@ ones to add. Apply only what I choose.
 The CLAUDE.md tells Claude to use these instead of the defaults. Install via Homebrew:
 
 ```bash
-brew install ripgrep fd bat tree git-delta fzf
+brew install ripgrep fd bat tree git-delta fzf mergiraf
 ```
 
 | Tool | Replaces | Why |
@@ -42,6 +42,26 @@ brew install ripgrep fd bat tree git-delta fzf
 | `tree` | `ls -R` | Visual directory structure |
 | `delta` | `diff` | Syntax-highlighted git diffs |
 | `fzf` | manual searching | Fuzzy find anything - files, branches, history |
+| `mergiraf` | git's line-based merge | Syntax-aware conflict resolution via tree-sitter ([blog post](https://haacked.com/archive/2026/03/25/resolve-merge-conflicts/)) |
+
+### Mergiraf setup
+
+Mergiraf is a syntax-aware merge driver that resolves conflicts git's line-based strategy can't handle (reordered imports, moved-and-edited code, commutative struct fields). Used by [`/crebase`](skills/crebase/SKILL.md).
+
+After installing, register it as a git merge driver and apply it to all files:
+
+```bash
+git config --global merge.mergiraf.name mergiraf
+git config --global merge.mergiraf.driver 'mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L'
+git config --global merge.conflictStyle diff3
+```
+
+```bash
+# ~/.config/git/attributes (create if it doesn't exist)
+echo '* merge=mergiraf' >> ~/.config/git/attributes
+```
+
+The wildcard is safe -- unsupported file types fall back to git's default merge. To see all supported languages run `mergiraf languages --gitattributes`.
 
 ## Skills
 
