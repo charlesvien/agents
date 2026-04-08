@@ -1,13 +1,13 @@
 ---
 name: crebase
-description: Rebase the current branch onto its parent, resolving conflicts with mergiraf syntax-aware merging. Uses Graphite stacked PRs if available, falls back to git rebase.
+description: Rebase the current branch onto its parent, resolving conflicts. Uses Graphite stacked PRs if available, falls back to git rebase.
 disable-model-invocation: true
 allowed-tools: Bash, Read, Edit, Write, Glob, Grep
 ---
 
 ## Instructions
 
-Rebase the current branch onto its parent, resolving any conflicts along the way. Uses mergiraf for syntax-aware conflict resolution before falling back to manual resolution.
+Rebase the current branch onto its parent, resolving any conflicts along the way.
 
 ### Step 1: Check state
 
@@ -26,8 +26,6 @@ Determine whether Graphite is available and tracking this branch:
 
 ### Step 3: Rebase
 
-Mergiraf is registered as a git merge driver and runs automatically during rebase. It resolves syntax-aware conflicts (reordered imports, moved-and-edited code, commutative struct fields) that git's line-based merge cannot handle.
-
 **If Graphite is managing the stack:**
 ```
 gt sync
@@ -40,17 +38,16 @@ git fetch origin main
 git rebase origin/main
 ```
 
-### Step 4: Resolve remaining conflicts
+### Step 4: Resolve conflicts
 
-If there are merge conflicts after the automatic mergiraf pass:
+If there are merge conflicts:
 
 1. Run `git status` to see which files are conflicted
-2. For each conflicted file, run `mergiraf solve <file>` to attempt syntax-aware resolution of the remaining conflict markers. This handles conflicts that the merge driver couldn't resolve in its initial pass (e.g. when working from conflict markers rather than the original revisions).
-3. If `mergiraf solve` fully resolves a file (no conflict markers remain), stage it with `git add <file>`
-4. For any conflicts that mergiraf cannot resolve, read the file to understand both sides and resolve manually. Don't just pick one side blindly — understand the intent of both changes and merge them correctly.
-5. Stage resolved files with `git add <file>`
-6. Continue the rebase with `git rebase --continue`
-7. Repeat until the rebase is complete
+2. Read each conflicted file fully to understand both sides
+3. Resolve the conflict intelligently — don't just pick one side blindly. Understand the intent of both changes and merge them correctly.
+4. After resolving a file, stage it with `git add <file>`
+5. Continue the rebase with `git rebase --continue`
+6. Repeat until the rebase is complete
 
 ### Step 5: Verify
 
@@ -60,13 +57,11 @@ After the rebase completes:
 2. Run `pnpm lint` to catch any lint issues introduced
 3. Fix any issues found and amend the relevant commits if needed
 
-Mergiraf is syntax-aware but not semantically aware. A clean merge can still produce logically incorrect code. The typecheck and lint steps are essential.
-
 ### Step 6: Report
 
 Tell the user:
 - The stack position (from `gt log short`, if using Graphite)
-- How many conflicts were resolved (total and how many mergiraf handled vs manual)
+- How many conflicts were resolved (if any)
 - Which files were affected
 - Whether typecheck and lint pass
 
