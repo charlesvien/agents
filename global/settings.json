@@ -4,6 +4,7 @@
     "pr": ""
   },
   "model": "opus",
+  "effortLevel": "max",
   "skipDangerousModePermissionPrompt": true,
   "hooks": {
     "PreToolUse": [
