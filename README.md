@@ -91,8 +91,8 @@ Configured in [`global/settings.json`](global/settings.json):
 
 | Alias | What it does |
 |---|---|
-| `cc` | Launch Claude Code with all permissions |
-| `ccw` | Launch Claude Code with all permissions in a worktree |
+| `cc` | Launch Claude Code with Opus, max effort and all permissions |
+| `ccw` | Launch Claude Code with Opus, max effort and all permissions in a worktree |
 | `ciaclean` | Delete local branches already merged into main ([source](https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html)) |
 
 > Defined in [`global/aliases.sh`](global/aliases.sh). Source it from your `.zshrc` or cherry-pick what you want. If you update aliases, re-source your `.zshrc` (`source ~/.zshrc`) or open a new terminal.

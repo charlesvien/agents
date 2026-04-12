@@ -1,4 +1,4 @@
-alias cc='claude --dangerously-skip-permissions'
-alias ccw='claude --dangerously-skip-permissions --worktree'
+alias cc='claude --dangerously-skip-permissions --model opus --effort max'
+alias ccw='claude --dangerously-skip-permissions --worktree --model opus --effort max'
 alias ciaclean='git branch --merged origin/main | grep -vE "^\s*(\*|main|master)" | xargs -n 1 git branch -d'
 alias gts='gt submit --stack --force'
