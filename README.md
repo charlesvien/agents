@@ -13,7 +13,15 @@ cd agents
 ./scripts/install.sh
 ```
 
-The install script handles skills and agents but **not** [`settings.json`](global/settings.json) or [`CLAUDE.md`](global/CLAUDE.md) since those are personal config that you'll want to customize. Instead of copying blindly, paste this prompt into Claude Code and it'll compare my config with yours, explain the differences and let you pick what to adopt:
+The install script handles skills and agents but **not** [`settings.json`](global/settings.json) or [`CLAUDE.md`](global/CLAUDE.md) since those are personal config that you'll want to customize. To get the shell aliases (`cc`, `ccw` etc.), add this to your `.zshrc`:
+
+```bash
+source ~/path/to/agents/global/aliases.sh
+```
+
+If you update or pull new aliases, re-source your `.zshrc` or open a new terminal for the changes to take effect.
+
+Instead of copying config blindly, paste this prompt into Claude Code and it'll compare my config with yours, explain the differences and let you pick what to adopt:
 
 ```
 Read the CLAUDE.md and settings.json from the agents repo I just
@@ -95,7 +103,7 @@ Configured in [`global/settings.json`](global/settings.json):
 | `ccw` | Launch Claude Code with all permissions in a worktree |
 | `ciaclean` | Delete local branches already merged into main ([source](https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html)) |
 
-> Copyable aliases in [`global/aliases.sh`](global/aliases.sh). Source it from your `.zshrc` or cherry-pick what you want.
+> Defined in [`global/aliases.sh`](global/aliases.sh). See [Setup](#setup) for sourcing instructions.
 
 ## Experimenting with
 
