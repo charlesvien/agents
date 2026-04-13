@@ -105,4 +105,5 @@ Configured in [`global/settings.json`](global/settings.json):
 
 ## Attribution
 
-Some skills and agents adapted from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) by [@affaan-m](https://github.com/affaan-m).
+- Environment variable tweaks (`CLAUDE_CODE_DISABLE_1M_CONTEXT`, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING`, `CLAUDE_CODE_DISABLE_AUTO_MEMORY`, `CLAUDE_CODE_SUBAGENT_MODEL`) from [@kunchenguid](https://x.com/kunchenguid/status/2043511416448307378)
+- Some skills and agents adapted from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) by [@affaan-m](https://github.com/affaan-m)
