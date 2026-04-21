@@ -36,21 +36,20 @@ Combine and deduplicate results across all queries.
 
 ### Step 3: Evaluate matches
 
-**If matching issues were found**, display them ranked by relevance:
+**If matching issues were found**, display them ranked by relevance. Use this exact format:
 
 ```
-## Existing issues
+## Found <N> matching issues
 
-### 1. <title>
-**#<number>** · <state> · Updated <relative date e.g. "3 days ago">
-<url>
+**1. #<number>** — <url>
+Title: <title>
 Labels: `<label1>` `<label2>`
-
+Updated: <relative date>
+Body:
 <first 2-3 sentences of the issue body, truncated with "..." if longer>
 
----
-
-### 2. ...
+**2. #<number>** — <url>
+...
 ```
 
 Then stop. Do NOT offer to create a new issue. Let the user decide.
