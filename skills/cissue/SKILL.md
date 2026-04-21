@@ -29,13 +29,13 @@ Summarize the problem in one sentence for yourself before proceeding.
 Build 2-3 search queries from the key terms identified in Step 1. Run each:
 
 ```bash
-gh issue list --repo posthog/code --search "<query>" --state open --limit 5 --json number,title,url,labels,updatedAt
+gh issue list --repo posthog/code --search "<query>" --state open --limit 5 --json number,title,url,labels,updatedAt,body
 ```
 
 Also search closed issues in case it was already resolved:
 
 ```bash
-gh issue list --repo posthog/code --search "<query>" --state closed --limit 3 --json number,title,url,labels,updatedAt
+gh issue list --repo posthog/code --search "<query>" --state closed --limit 3 --json number,title,url,labels,updatedAt,body
 ```
 
 Combine and deduplicate results across all queries.
@@ -49,8 +49,8 @@ Combine and deduplicate results across all queries.
 
 1. #<number> - <title> (<state>)
    <url>
-   Labels: <labels>
-   Updated: <date>
+   Labels: <labels> | Updated: <date>
+   > <first 2-3 sentences of the issue body, truncated>
 
 2. ...
 ```
