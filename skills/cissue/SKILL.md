@@ -32,12 +32,6 @@ Build 2-3 search queries from the key terms identified in Step 1. Run each:
 gh issue list --repo posthog/code --search "<query>" --state open --limit 5 --json number,title,url,labels,updatedAt,body
 ```
 
-Also search closed issues in case it was already resolved:
-
-```bash
-gh issue list --repo posthog/code --search "<query>" --state closed --limit 3 --json number,title,url,labels,updatedAt,body
-```
-
 Combine and deduplicate results across all queries.
 
 ### Step 3: Evaluate matches
