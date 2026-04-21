@@ -47,12 +47,16 @@ Combine and deduplicate results across all queries.
 ```
 ## Existing issues
 
-1. #<number> - <title> (<state>)
-   <url>
-   Labels: <labels> | Updated: <date>
-   > <first 2-3 sentences of the issue body, truncated>
+### 1. <title>
+**#<number>** · <state> · Updated <relative date e.g. "3 days ago">
+<url>
+Labels: `<label1>` `<label2>`
 
-2. ...
+<first 2-3 sentences of the issue body, truncated with "..." if longer>
+
+---
+
+### 2. ...
 ```
 
 Then stop. Do NOT offer to create a new issue. Let the user decide.
