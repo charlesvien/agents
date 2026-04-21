@@ -12,6 +12,8 @@ argument-hint: "<pasted slack messages>"
 
 You are triaging Slack messages to find or create a GitHub issue. The pasted messages are in `$ARGUMENTS`.
 
+**Default repo**: `posthog/code`. All `gh` commands must use `--repo posthog/code` unless the user specifies a different repo.
+
 ### Step 1: Extract the problem
 
 Parse the Slack messages. Identify:
@@ -27,13 +29,13 @@ Summarize the problem in one sentence for yourself before proceeding.
 Build 2-3 search queries from the key terms identified in Step 1. Run each:
 
 ```bash
-gh issue list --search "<query>" --state open --limit 5 --json number,title,url,labels,updatedAt
+gh issue list --repo posthog/code --search "<query>" --state open --limit 5 --json number,title,url,labels,updatedAt
 ```
 
 Also search closed issues in case it was already resolved:
 
 ```bash
-gh issue list --search "<query>" --state closed --limit 3 --json number,title,url,labels,updatedAt
+gh issue list --repo posthog/code --search "<query>" --state closed --limit 3 --json number,title,url,labels,updatedAt
 ```
 
 Combine and deduplicate results across all queries.
@@ -67,7 +69,7 @@ Generate issue metadata from the Slack conversation:
   - **Problem**: What is broken or missing
   - **Expected behavior**: What should happen instead
   - **Steps to reproduce**: If any were mentioned in the thread
-- **Labels**: Pick from the repo's existing labels. Run `gh label list --limit 50 --json name` to get available labels. Pick 1-3 that fit. If none fit well, use none.
+- **Labels**: Pick from the repo's existing labels. Run `gh label list --repo posthog/code --limit 50 --json name` to get available labels. Pick 1-3 that fit. If none fit well, use none.
 
 ### Step 5: Preview and confirm
 
@@ -85,7 +87,7 @@ Show the user exactly what will be created:
 
 Then ask: **Create this issue? (y/N)**
 
-- **If y**: Create it with `gh issue create --title "<title>" --body "<body>" --label "<label1>,<label2>"` and display the resulting URL.
+- **If y**: Create it with `gh issue create --repo posthog/code --title "<title>" --body "<body>" --label "<label1>,<label2>"` and display the resulting URL.
 - **If N or no response**: Do nothing. Tell the user they can adjust and re-run.
 
 Do NOT create the issue without explicit confirmation.
