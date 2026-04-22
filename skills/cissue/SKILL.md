@@ -8,6 +8,12 @@ arguments: slack-messages
 argument-hint: "<pasted slack messages>"
 ---
 
+## Writing conventions
+
+- No em dashes. Use hyphens, commas or separate sentences instead.
+- No Oxford commas (no comma before "and" in lists).
+- English only.
+
 ## Instructions
 
 You are triaging Slack messages to find or create a GitHub issue. The pasted messages are in `$ARGUMENTS`.
@@ -41,14 +47,14 @@ Combine and deduplicate results across all queries.
 ```
 ## Found <N> matching issues
 
-**1. #<number>** — <url>
+**1. #<number>** - <url>
 Title: <title>
 Labels: `<label1>` `<label2>`
 Updated: <relative date>
 Body:
 <first 2-3 sentences of the issue body, truncated with "..." if longer>
 
-**2. #<number>** — <url>
+**2. #<number>** - <url>
 ...
 ```
 
