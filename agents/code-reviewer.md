@@ -26,6 +26,10 @@ Check for:
 - Performance (N+1 queries, unnecessary re-renders, missing memoization)
 - TypeScript strictness (any casts, missing null checks, type assertions)
 - Missing error handling or edge cases
+- Duplicated code (copy-pasted logic in the diff or new code that duplicates existing repo code)
+- Code smells (god functions, deep nesting 3+ levels, boolean blindness, primitive obsession, feature envy)
+- Bad abstractions (wrong abstraction level, leaky abstractions, premature abstractions, inheritance over composition)
+- Architectural issues (wrong layer, circular dependencies, tight coupling between independent modules, low cohesion)
 
 Skip:
 - Style/formatting (Biome handles this)

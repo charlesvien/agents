@@ -52,7 +52,7 @@ For each changed file, read the full file (not just the diff) to understand the 
 
 ### Step 4: Review and categorize
 
-Analyze the changes for correctness, security, performance, readability and adherence to the project's conventions (see CLAUDE.md). Group your findings into these categories:
+Analyze the changes for correctness, security, performance, readability, architecture and adherence to the project's conventions (see CLAUDE.md). Group your findings into these categories:
 
 #### Critical
 Issues that **must** be fixed before merging. Examples:
@@ -60,6 +60,7 @@ Issues that **must** be fixed before merging. Examples:
 - Security vulnerabilities (XSS, injection, leaked secrets)
 - Data loss risks
 - Breaking changes to public APIs
+- Obvious architectural violations (wrong layer, circular dependencies, breaking module boundaries)
 
 #### Suggestions
 Things that **should** be improved but aren't blockers. Examples:
@@ -67,6 +68,10 @@ Things that **should** be improved but aren't blockers. Examples:
 - Better error handling
 - Code clarity / naming
 - Missing edge cases
+- **Duplicated code**: copy-pasted logic that should be extracted into a shared function or module. Flag when the same pattern appears 2+ times in the diff or when new code duplicates existing code in the repo.
+- **Code smells**: god functions (too many responsibilities), deep nesting (3+ levels), boolean blindness (functions with multiple boolean params), primitive obsession (passing raw strings/numbers where a type would be clearer), feature envy (a function that mostly operates on another module's data)
+- **Bad abstractions**: wrong level of abstraction, leaky abstractions that expose implementation details, premature abstractions that add complexity without reuse, inheritance where composition would be simpler
+- **Coupling and cohesion**: tight coupling between modules that should be independent, low cohesion within a module (doing unrelated things), hidden dependencies via globals or singletons
 
 #### Nits
 Minor stylistic or preference items. Examples:
