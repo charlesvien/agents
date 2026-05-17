@@ -67,10 +67,11 @@ Then stop. Do NOT offer to create a new issue. Let the user decide.
 Generate issue metadata from the Slack conversation:
 
 - **Title**: Short, specific, under 80 characters. Describe the problem not the symptom.
-- **Description**: Structured as:
-  - **Problem**: What is broken or missing
-  - **Expected behavior**: What should happen instead
-  - **Steps to reproduce**: If any were mentioned in the thread
+- **Description**: Pick the shape that fits the issue. Only include sections that are actually applicable.
+  - **Bug**: `Problem` (what is broken), `Expected behavior` (what should happen instead), `Steps to reproduce` (only if mentioned in the thread).
+  - **Enhancement or feature request**: `Description` (what is being asked for and why it matters), `Proposed solution` (only if one was suggested in the thread). Do not frame it as a "Problem" and do not include `Expected behavior` or `Steps to reproduce`.
+  - **Task or chore**: `Context` (why this is needed), `Scope` (what should be done).
+  Omit any section you have no real content for. Do not include empty headings.
 - **Labels**: Pick from the repo's existing labels. Run `gh label list --repo posthog/code --limit 50 --json name` to get available labels. Pick 1-3 that fit. If none fit well, use none.
 
 ### Step 5: Preview and confirm
