@@ -68,7 +68,6 @@ Generate issue metadata from the Slack conversation:
 
 - **Title**: Short, specific, under 80 characters. Describe the problem not the symptom.
 - **Description**: Structured as:
-  - **Context**: Where this came up (Slack thread summary, who raised it)
   - **Problem**: What is broken or missing
   - **Expected behavior**: What should happen instead
   - **Steps to reproduce**: If any were mentioned in the thread
