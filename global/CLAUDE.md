@@ -30,3 +30,5 @@
 - Run checks in parallel when possible (typecheck, lint, test are independent).
 - Don't commit, push or create PRs unless I explicitly say to. Every action requires explicit instruction every time. Saying "commit this" once does not grant permission for future commits or pushes in the same session.
 - When I say "commit this" just do it. Don't ask for confirmation. But only commit. Don't push unless I also say push.
+
+@RTK.md
