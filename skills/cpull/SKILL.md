@@ -2,7 +2,7 @@
 name: cpull
 description: Pull all PR comments from GitHub (bots and humans), generate responses and code fixes, then optionally reply and resolve
 disable-model-invocation: true
-allowed-tools: Bash, Read, Edit, Write, Glob, Grep
+allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Agent
 user-invocable: true
 arguments: pr-url-or-mode
 argument-hint: "[<github pr url>] [each]"
@@ -96,27 +96,32 @@ Skip:
 
 Mark bot comments. A login is a bot if it ends in `[bot]` or matches: `coderabbitai`, `graphite-app`, `vercel`, `claude`, `dependabot`, `renovate`, `codecov`.
 
-### Step 5: Read code context for inline comments
+### Step 5: Fan out subagents
 
-For each unresolved inline thread:
-- Read the file at `path` with 10 lines around `line` (fall back to `originalLine` if `line` is null because the diff moved)
-- The comment's `diffHunk` shows the original code that was commented on. Use it to find the right spot if the line moved.
+Fan out one parallel subagent (using the Agent tool, subagent_type: `general-purpose`) per actionable comment in a single response. For PRs with many comments, batch ~5 comments per subagent instead of spawning one per comment.
 
-### Step 6: Generate a response and proposed change
+Each subagent processes its assigned comment(s):
 
-For each actionable comment, classify the action:
-- **change**: the comment is right, fix the code
-- **reply**: needs a written response (a question, clarification or push-back)
-- **both**: change the code and explain in a reply
-- **dismiss**: bot false positive or stale, resolve without replying
+> You are processing PR review comments. For each comment below:
+>
+> 1. If inline, read the file at `<path>` with 10 lines of context around `<line>` (fall back to `<originalLine>` if line is null because the diff moved). Use the `diffHunk` to find the right spot if the line moved.
+> 2. Classify the action:
+>    - **change**: the comment is right, fix the code
+>    - **reply**: needs a written response (a question, clarification or push-back)
+>    - **both**: change the code and explain in a reply
+>    - **dismiss**: bot false positive or stale, resolve without replying
+> 3. Draft a short reply (1-3 sentences, conversational, no fluff). For bot false positives, the reply explains why the suggestion is wrong before dismissing.
+> 4. If action is `change` or `both`: draft the exact code change as before/after.
+>
+> **Comments to process**:
+> - Comment `<i>`: author `<login>`, type `<inline|top-level|review-summary>`, location `<file>:<line>`, body `<body>`, diffHunk `<diffHunk>`
+> - ...
+>
+> Return for each comment: action, reply text (or "(none)" for dismiss), code change as before/after diff (or "(none)"), and the 5-line code context around the target with the target line marked `>>>`.
 
-For each, draft:
-- A short reply (1-3 sentences, conversational, no fluff)
-- The exact code change as before/after when action is `change` or `both`
+Wait for all subagents to complete before proceeding.
 
-For bot false positives, write a reply explaining why the suggestion is wrong before dismissing.
-
-### Step 7: Print to console
+### Step 6: Print to console
 
 Lead with a header:
 
@@ -159,7 +164,7 @@ File: <path>
 ```
 ```
 
-### Step 8: Apply (optional)
+### Step 7: Apply (optional)
 
 **If `each` was passed**: after printing each comment, ask `Apply this one? (y/N)`. Act per-comment as you go.
 

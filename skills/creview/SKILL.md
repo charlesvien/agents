@@ -2,7 +2,7 @@
 name: creview
 description: Review code changes on the current branch or a GitHub PR URL
 disable-model-invocation: true
-allowed-tools: Bash, Read, Glob, Grep, Task
+allowed-tools: Bash, Read, Glob, Grep, Agent
 ---
 
 ## Instructions
@@ -46,70 +46,41 @@ git diff <parent>...HEAD
 
 This is the **only** diff you should review. Do not break it down by commit. Also check for uncommitted changes with `git diff` and `git status`.
 
-### Step 3: Read and understand the changed files
+### Step 3: Fan out subagents
 
-For each changed file, read the full file (not just the diff) to understand the surrounding context. This is critical for catching issues the diff alone won't reveal.
+Fan out 3 parallel subagents (using the Agent tool, subagent_type: `general-purpose`) in a single response. Each subagent reads every changed file in full for context and returns findings for its assigned lens.
 
-### Step 4: Review and categorize
+**Subagent 1 - Critical correctness, security and architecture:**
+> Review the diff between `<parent>` and HEAD. Read every changed file in full. Identify only Critical issues that must be fixed before merging:
+> - Bugs, logic errors, race conditions
+> - Security vulnerabilities (XSS, injection, leaked secrets)
+> - Data loss risks
+> - Breaking changes to public APIs
+> - Architectural violations (wrong layer, circular dependencies, broken module boundaries)
+>
+> For each finding return `<file>:<line>`, a quoted snippet, an explanation and a suggested fix. Return "(none)" if there are no Critical issues.
 
-Analyze the changes for correctness, security, performance, readability, architecture and adherence to the project's conventions (see CLAUDE.md). Group your findings into these categories:
+**Subagent 2 - Code quality, nits and praise:**
+> Review the diff between `<parent>` and HEAD. Read every changed file in full. Identify:
+> - **Suggestions**: performance, error handling, code clarity, missing edge cases, duplicated code (same pattern 2+ times or duplicating existing repo code), code smells (god functions, deep nesting 3+ levels, boolean blindness, primitive obsession, feature envy), bad abstractions (wrong level, leaky, premature, inheritance where composition fits), coupling and cohesion (tight coupling between independent modules, low cohesion within a module, hidden dependencies via globals/singletons).
+> - **Nits**: naming tweaks, comment improvements, minor restructuring.
+> - **Praise**: clean abstractions, thoughtful error handling, good patterns worth calling out.
+>
+> For each finding return `<file>:<line>`, a quoted snippet, an explanation and a suggested fix.
 
-#### Critical
-Issues that **must** be fixed before merging. Examples:
-- Bugs, logic errors, race conditions
-- Security vulnerabilities (XSS, injection, leaked secrets)
-- Data loss risks
-- Breaking changes to public APIs
-- Obvious architectural violations (wrong layer, circular dependencies, breaking module boundaries)
+**Subagent 3 - Test coverage:**
+> For each changed file in the diff between `<parent>` and HEAD:
+> 1. Find existing tests (colocated `*.test.ts`/`*.test.tsx` and related files in `tests/` or `__tests__/`).
+> 2. Assess whether new or modified code paths are covered: new functions with no test cases, new branches/conditions, changed behavior existing tests don't validate, edge cases the changes introduce.
+> 3. Flag testable code that lacks coverage: business logic, data transformations, utilities, state transitions (store actions, reducers), error handling, complex conditionals.
+> 4. Skip: trivial glue code, type-only changes, simple re-exports, config files, pure UI layout changes with no logic.
+>
+> Return a list of changed files with their test status and concrete test cases that would add the most value (describe what to test, not full test code).
 
-#### Suggestions
-Things that **should** be improved but aren't blockers. Examples:
-- Performance improvements
-- Better error handling
-- Code clarity / naming
-- Missing edge cases
-- **Duplicated code**: copy-pasted logic that should be extracted into a shared function or module. Flag when the same pattern appears 2+ times in the diff or when new code duplicates existing code in the repo.
-- **Code smells**: god functions (too many responsibilities), deep nesting (3+ levels), boolean blindness (functions with multiple boolean params), primitive obsession (passing raw strings/numbers where a type would be clearer), feature envy (a function that mostly operates on another module's data)
-- **Bad abstractions**: wrong level of abstraction, leaky abstractions that expose implementation details, premature abstractions that add complexity without reuse, inheritance where composition would be simpler
-- **Coupling and cohesion**: tight coupling between modules that should be independent, low cohesion within a module (doing unrelated things), hidden dependencies via globals or singletons
+Wait for all three subagents to complete before proceeding.
 
-#### Nits
-Minor stylistic or preference items. Examples:
-- Naming tweaks
-- Comment improvements
-- Minor restructuring
+### Step 4: Synthesize and output
 
-#### Praise
-Call out things done well. Good patterns, clean abstractions, thoughtful error handling, etc.
-
-### Step 5: Check test coverage
-
-For each changed file, determine whether tests exist and whether the changes are adequately covered:
-
-1. **Find existing tests**: Look for colocated test files (e.g., `foo.test.ts` next to `foo.ts`) and related test files in `tests/` or `__tests__/` directories.
-2. **Assess coverage of changes**: Check whether the existing tests exercise the new or modified code paths. Look for:
-   - New functions/methods that have no test cases
-   - New branches/conditions that aren't covered
-   - Changed behavior that existing tests don't validate
-   - Edge cases introduced by the changes
-3. **Identify testable code**: Flag code that should have tests but doesn't. Prioritize:
-   - Business logic and data transformations
-   - Utility functions and helpers
-   - State transitions (store actions, reducers)
-   - Error handling paths
-   - Complex conditionals or algorithms
-4. **Skip test suggestions for**: Trivial glue code, type-only changes, simple re-exports, config files and pure UI layout changes with no logic.
-
-### Step 6: Output
-
-Present the review in the categories above. For each item:
-- Reference the file and line number (e.g., `src/main/services/git.ts:42`)
-- Quote the relevant code snippet
-- Explain the issue and suggest a fix
-
-After the categorized feedback, add a **Test Coverage** section:
-- List changed files and whether they have corresponding tests
-- Call out specific functions or code paths that lack test coverage
-- Suggest concrete test cases that would add the most value (describe what to test, not full test code)
+Merge findings from the three subagents into a single review. Cross-check for overlap and resolve any contradictions using your own read of the diff. Present sections in this order: Critical, Suggestions, Nits, Praise, Test coverage. For each finding include `<file>:<line>`, the quoted snippet, the explanation and the suggested fix.
 
 End with an overall **Verdict**: one of `Ship it`, `Needs changes` or `Needs discussion`.

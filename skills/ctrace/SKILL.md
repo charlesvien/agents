@@ -2,7 +2,7 @@
 name: ctrace
 description: Trace a tRPC procedure from renderer call site through router to service and back
 disable-model-invocation: true
-allowed-tools: Bash, Read, Glob, Grep
+allowed-tools: Bash, Read, Glob, Grep, Agent
 user-invocable: true
 arguments: procedure-name
 ---
@@ -17,47 +17,36 @@ Split the argument into:
 - **Router name**: the part before the dot (e.g., `git`)
 - **Method name**: the part after the dot (e.g., `detectRepo`)
 
-### Step 2: Find the router
+### Step 2: Fan out subagents
 
-Search `apps/twig/src/main/trpc/routers/` for the router file that defines this procedure. Read the router file and find the specific procedure definition.
+Fan out 4 parallel subagents (using the Agent tool, subagent_type: `general-purpose`) in a single response, one per search aspect:
 
-Identify:
-- Input/output Zod schemas
-- The service method it calls
-- Whether it's a query, mutation, or subscription
+**Subagent 1 - Router and service:**
+> Find the router and service for tRPC procedure `<router>.<method>`.
+> 1. Search `apps/twig/src/main/trpc/routers/` for the router file defining this procedure.
+> 2. Read the router file and find the procedure definition. Note input/output Zod schemas, the service method called, and whether it's a query, mutation or subscription.
+> 3. Read the service implementation in full. Note what the method does, any events it emits, and any other services it calls.
+>
+> Return: router file path, procedure definition snippet, service class and method, input/output schemas, procedure type (query/mutation/subscription), behavior summary, emitted events, dependent services.
 
-### Step 3: Find the service
+**Subagent 2 - Renderer call sites:**
+> Search `apps/twig/src/renderer/` (components, hooks, stores, features) for all usages of `trpc.<router>.<method>`. For each call site, note the file, the component or hook that makes the call, whether it uses `.query()`, `.useMutation()`, `.useQuery()` etc., and what it does with the result.
+>
+> Return: list of call sites with file, caller, call type and result handling.
 
-From the router, identify which service class and method are invoked. Find and read the service implementation. Note:
-- What the method does
-- What events it emits (if any)
-- What other services it calls
+**Subagent 3 - Related subscriptions:**
+> Search `apps/twig/src/main/trpc/routers/` for the router file of `<router>` and identify any subscription procedures inside it (typically named `on*`) that relate to `<method>`. Then search `apps/twig/src/renderer/` for `.useSubscription()` consumers of those subscriptions.
+>
+> Return: list of related subscription procedures with their renderer consumers, or "none" if there are no relevant subscriptions.
 
-### Step 4: Find renderer call sites
+**Subagent 4 - Consuming stores:**
+> Search `apps/twig/src/renderer/` for Zustand stores that consume or cache data from `trpc.<router>.<method>`. Look for store updates triggered by query results or by subscriptions in the same router.
+>
+> Return: list of stores with file path, store name and how they consume the data.
 
-Search the renderer code for all usages of this procedure:
+Wait for all four subagents to complete.
 
-```
-trpc.<router>.<method>
-```
-
-Look in:
-- `apps/twig/src/renderer/` — components, hooks, stores, features
-
-For each call site, note:
-- The file and component/hook that makes the call
-- Whether it uses `.query()`, `.useMutation()`, `.useQuery()`, etc.
-- What it does with the result
-
-### Step 5: Find related subscriptions
-
-If the service emits events, search for tRPC subscriptions on related events in the same router. Then search the renderer for subscription consumers (`trpc.<router>.on*`, `.useSubscription()`).
-
-### Step 6: Find consuming stores
-
-Identify which Zustand stores consume or cache the data from this procedure. Search for store updates triggered by the query results or subscription events.
-
-### Step 7: Output the call chain
+### Step 3: Output the call chain
 
 Present a full trace diagram showing the data flow:
 

@@ -2,7 +2,7 @@
 name: crefactor
 description: Parallelize a straightforward code transformation across many files (migrations, renames, pattern replacements)
 disable-model-invocation: true
-allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Task
+allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Agent
 user-invocable: true
 arguments: task-description
 ---
@@ -46,15 +46,15 @@ Split files into two groups:
 
 Process foundation files sequentially yourself (don't parallelize these). After each one, verify imports still resolve.
 
-### Step 6: Parallelize leaf file transformations
+### Step 6: Fan out subagents for leaf file transformations
 
-Split the leaf files into batches of ~5 files each. For each batch, launch a **parallel Task agent** (subagent_type: `general-purpose`) with this prompt structure:
+Split the leaf files into batches of ~5 files each. Fan out one parallel subagent (using the Agent tool, subagent_type: `general-purpose`) per batch, all in a single response. Each subagent receives this prompt structure:
 
 > You are performing the following code transformation:
 >
 > **Task:** [the transformation description]
 >
-> **Pattern:** Change [source pattern] → [target pattern]
+> **Pattern:** Change [source pattern] -> [target pattern]
 >
 > **Examples of correct transformation:**
 > ```
@@ -79,7 +79,7 @@ Split the leaf files into batches of ~5 files each. For each batch, launch a **p
 >
 > Return a summary of what you changed in each file.
 
-Launch all batch agents in parallel. Wait for all to complete.
+Wait for all batch subagents to complete.
 
 ### Step 7: Verify
 
