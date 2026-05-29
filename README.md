@@ -72,6 +72,12 @@ Skills inherit whatever model your session is using.
 | [`/cdebug`](skills/cdebug/SKILL.md) | Triage a bug report, find root cause, explain and offer a fix |
 | [`/clogs`](skills/clogs/SKILL.md) | Find Claude/Twig session log files |
 
+**Fun**
+
+| Skill | What it does |
+|---|---|
+| [`/cgraveyard`](skills/cgraveyard/SKILL.md) | ASCII graveyard of every subagent that perished in the current session |
+
 ## Hooks
 
 Configured in [`global/settings.json`](global/settings.json):
