@@ -86,6 +86,18 @@ Configured in [`global/settings.json`](global/settings.json):
 |---|---|---|
 | [`suggest-compact.js`](scripts/suggest-compact.js) | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
 
+## Status line
+
+[`statusline.sh`](scripts/statusline.sh) renders a compact dashboard: model, git branch with oh-my-zsh-style state flags (`*` unstaged, `+` staged, `%` untracked, `$` stashed and upstream sync `=`/`<`/`>`/`<>`), a context-usage bar with percent, session cost and lines added/removed. `install.sh` symlinks it to `~/.claude/statusline.sh`. The script is executable, so reference it directly (no `bash` prefix) in [`global/settings.json`](global/settings.json):
+
+```json
+"statusLine": {
+  "type": "command",
+  "command": "~/.claude/statusline.sh",
+  "padding": 0
+}
+```
+
 ## Agents
 
 | Agent | Model | What it does |

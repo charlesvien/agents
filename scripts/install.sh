@@ -62,8 +62,12 @@ done
 for script in "$SCRIPT_DIR"/scripts/*; do
   [ -f "$script" ] || continue
   name="$(basename "$script")"
+  [ "$name" = "statusline.sh" ] && continue   # linked to ~/.claude/ top level below
   link_item "$script" "$HOME/.claude/scripts/$name" "$name" "script"
 done
+
+# statusline lives at the top level since settings.json points to ~/.claude/statusline.sh
+link_item "$SCRIPT_DIR/scripts/statusline.sh" "$HOME/.claude/statusline.sh" "statusline.sh" "statusline"
 
 echo ""
 if [ $new -gt 0 ]; then
