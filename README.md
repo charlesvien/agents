@@ -116,12 +116,6 @@ Configured in [`global/settings.json`](global/settings.json):
 
 > Defined in [`global/aliases.sh`](global/aliases.sh). Source it from your `.zshrc` or cherry-pick what you want. If you update aliases, re-source your `.zshrc` (`source ~/.zshrc`) or open a new terminal.
 
-## Experimenting with
-
-| Tool | What it does | Status |
-|---|---|---|
-| [RTK](https://github.com/rtk-ai/rtk) | Compresses command output before it hits Claude's context (60-90% token reduction) | Evaluating - token savings are real but wary about stripping context Opus needs during debugging |
-
 ## Attribution
 
 - Environment variable tweaks (`CLAUDE_CODE_DISABLE_1M_CONTEXT`, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING`, `CLAUDE_CODE_DISABLE_AUTO_MEMORY`, `CLAUDE_CODE_SUBAGENT_MODEL`) from [@kunchenguid](https://x.com/kunchenguid/status/2043511416448307378)
