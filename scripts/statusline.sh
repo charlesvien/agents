@@ -15,15 +15,19 @@ RED=$'\033[31m'
 MAGENTA=$'\033[35m'
 SEP=" ${DIM}│${RESET} "
 
-IFS=$'\t' read -r MODEL CWD PCT COST LINES_ADDED LINES_REMOVED < <(
+# Unit separator as delimiter: unlike tab it is not IFS whitespace, so an
+# empty field (e.g. no cwd) cannot collapse and shift the ones after it
+IFS=$'\x1f' read -r MODEL CWD PCT USED_TOKENS WINDOW_SIZE COST LINES_ADDED LINES_REMOVED < <(
   printf '%s' "$input" | jq -r '[
     (.model.display_name // "Claude"),
     (.workspace.current_dir // .cwd // ""),
     (.context_window.used_percentage // 0),
+    (.context_window.total_input_tokens // 0),
+    (.context_window.context_window_size // 200000),
     (.cost.total_cost_usd // 0),
     (.cost.total_lines_added // 0),
     (.cost.total_lines_removed // 0)
-  ] | @tsv'
+  ] | map(tostring) | join("\u001f")'
 )
 
 MODEL=${MODEL:-Claude}
@@ -34,6 +38,27 @@ LINES_REMOVED=${LINES_REMOVED:-0}
 PCT=${PCT%%.*}
 [[ "$PCT" =~ ^[0-9]+$ ]] || PCT=0
 [ "$PCT" -gt 100 ] && PCT=100
+
+USED_TOKENS=${USED_TOKENS%%.*}
+[[ "$USED_TOKENS" =~ ^[0-9]+$ ]] || USED_TOKENS=0
+WINDOW_SIZE=${WINDOW_SIZE%%.*}
+[[ "$WINDOW_SIZE" =~ ^[0-9]+$ ]] || WINDOW_SIZE=200000
+
+fmt_tokens() {
+    local n=$1
+    if [ "$n" -ge 1000000 ]; then
+        local tenths=$((n % 1000000 / 100000))
+        if [ "$tenths" -eq 0 ]; then
+            printf '%dM' $((n / 1000000))
+        else
+            printf '%d.%dM' $((n / 1000000)) "$tenths"
+        fi
+    elif [ "$n" -ge 1000 ]; then
+        printf '%dk' $((n / 1000))
+    else
+        printf '%d' "$n"
+    fi
+}
 
 # Single git call for branch, ahead/behind and working tree counts
 GIT_SEG=""
@@ -89,7 +114,7 @@ printf -v COST_FMT '$%.2f' "$COST" 2>/dev/null || COST_FMT='$0.00'
 
 STATUS="${CYAN}${MODEL}${RESET}"
 [ -n "$GIT_SEG" ] && STATUS+="${SEP}${GIT_SEG}"
-STATUS+="${SEP}${BAR_COLOR}${BAR}${RESET} ${DIM}${PCT}%${RESET}"
+STATUS+="${SEP}${BAR_COLOR}${BAR}${RESET} ${DIM}${PCT}% $(fmt_tokens "$USED_TOKENS")/$(fmt_tokens "$WINDOW_SIZE")${RESET}"
 STATUS+="${SEP}${MAGENTA}${COST_FMT}${RESET}"
 if [ "$LINES_ADDED" != "0" ] || [ "$LINES_REMOVED" != "0" ]; then
     STATUS+="${SEP}${GREEN}+${LINES_ADDED}${RESET}${DIM}/${RESET}${RED}-${LINES_REMOVED}${RESET}"
