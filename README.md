@@ -88,7 +88,7 @@ Configured in [`global/settings.json`](global/settings.json):
 
 ## Status line
 
-[`statusline.sh`](scripts/statusline.sh) renders a compact dashboard: model, git branch with oh-my-zsh-style state flags (`*` unstaged, `+` staged, `%` untracked, `$` stashed and upstream sync `=`/`<`/`>`/`<>`), a context-usage bar with percent, session cost and lines added/removed. `install.sh` symlinks it to `~/.claude/statusline.sh`. The script is executable, so reference it directly (no `bash` prefix) in [`global/settings.json`](global/settings.json):
+[`statusline.sh`](scripts/statusline.sh) renders a compact dashboard: model, git branch with change counts (`+n` staged, `~n` modified, `!n` conflicted, `?n` untracked, `↑n`/`↓n` ahead/behind upstream), a context-usage bar driven by the `context_window.used_percentage` field Claude Code supplies (green under 70%, yellow under 90%, red above), session cost and lines added/removed. It makes one `jq` and one `git status --porcelain=v2` call per refresh. `install.sh` symlinks it to `~/.claude/statusline.sh`. The script is executable, so reference it directly (no `bash` prefix) in [`global/settings.json`](global/settings.json):
 
 ```json
 "statusLine": {
