@@ -63,6 +63,7 @@ Skills inherit whatever model your session is using.
 |---|---|
 | [`/ctest`](skills/ctest/SKILL.md) | Generate colocated tests for a source file |
 | [`/crefactor`](skills/crefactor/SKILL.md) | Parallelize a code transformation across many files |
+| [`/cuiflash`](skills/cuiflash/SKILL.md) | Fix SPAs/SSR apps that flash the wrong UI before client-side data resolves |
 
 **Explore**
 
@@ -120,3 +121,4 @@ Configured in [`global/settings.json`](global/settings.json):
 
 - Environment variable tweaks (`CLAUDE_CODE_DISABLE_1M_CONTEXT`, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING`, `CLAUDE_CODE_DISABLE_AUTO_MEMORY`, `CLAUDE_CODE_SUBAGENT_MODEL`) from [@kunchenguid](https://x.com/kunchenguid/status/2043511416448307378)
 - Some skills and agents adapted from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) by [@affaan-m](https://github.com/affaan-m)
+- `/cuiflash` copied from [no-ui-flash](https://github.com/RhysSullivan/skills/blob/main/skills/no-ui-flash/SKILL.md) by [@RhysSullivan](https://github.com/RhysSullivan)
