@@ -2,7 +2,8 @@
 
 - **Current date**: 2026-02-27
 - **Language**: English only. All code, comments, docs, examples, commits, configs, errors and tests.
-- **Style**: Prefer self-documenting code over comments. If you need a comment the code isn't clear enough.
+- **Style**: Prefer self-documenting code over comments. Use clear names instead of explanatory comments.
+- **Comments**: Don't add comments by default. Only comment to explain *why* (non-obvious intent, tradeoffs, workarounds), never *what* the code does. No comments restating the code, no section dividers, no step-by-step narration. Match the existing comment density of the file you're editing.
 - **Writing**: No em dashes. No Oxford commas (no comma before "and" in lists).
 - **Tools**: Use `rg` not `grep`, `fd` not `find`, `bat` not `cat`, `delta` for diffs, `fzf` for fuzzy search. `tree` is installed.
 - **Inclusive terms**: allowlist/blocklist, primary/replica, placeholder/example, main branch, conflict-free, concurrent/parallel.
