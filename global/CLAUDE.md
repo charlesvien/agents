@@ -4,15 +4,29 @@
 - **Language**: English only. All code, comments, docs, examples, commits, configs, errors and tests.
 - **Style**: Prefer self-documenting code over comments. Use clear names instead of explanatory comments.
 - **Comments**: Don't add comments by default. Only comment to explain *why* (non-obvious intent, tradeoffs, workarounds), never *what* the code does. No comments restating the code, no section dividers, no step-by-step narration. Match the existing comment density of the file you're editing.
-- **Writing**: No em dashes. No Oxford commas (no comma before "and" in lists).
 - **Tools**: Use `rg` not `grep`, `fd` not `find`, `bat` not `cat`, `delta` for diffs, `fzf` for fuzzy search. `tree` is installed.
 - **Inclusive terms**: allowlist/blocklist, primary/replica, placeholder/example, main branch, conflict-free, concurrent/parallel.
+
+## Writing
+
+Applies to everything I read or ship: docs, comments, commit and PR text, Slack, chat replies. Write so it doesn't read as AI-generated.
+
+- **No em or en dashes**. Use a comma, period, colon or parentheses, or rewrite the sentence.
+- **No Oxford comma**. No comma before the final "and" or "or" in a list.
+- **Straight quotes and apostrophes only**, never curly or smart ones.
+- **No antithesis templates** like "it's not just X, it's Y", "not only X but also Y" or "this isn't about X, it's about Y".
+- **No inflated vocab**: delve, leverage, robust, seamless, elevate, boast, underscore, testament, realm, tapestry, landscape, navigate, intricate, crucial, pivotal, harness, foster, unlock, empower.
+- **No throat-clearing or hedging**: "it's worth noting that", "it's important to note", "in today's fast-paced world".
+- **No filler transitions** opening a sentence: "Moreover", "Furthermore", "Additionally".
+- **No wrap-up lines** like "In conclusion", "Overall" or "In summary" unless I ask.
+- **No forced rule-of-three** triads when one or two items carry the point.
+- **No emoji** unless I use them first.
 
 ## Git
 
 - **Branches**: Conventional prefix `<type>/<short-description>`. Types: feat, fix, docs, style, refactor, test, chore, perf.
 - **PR titles**: Conventional format `<type>(<scope>): <subject>` (e.g., `feat(auth): Add token refresh on expiry`).
-- **Commits**: Plain imperative subject, 50 chars max ("add login page" not "added login page"). No type prefixes. No period. Single-line only unless I ask otherwise. No attribution. Title only — never add a commit body/description.
+- **Commits**: Plain imperative subject, 50 chars max ("add login page" not "added login page"). No type prefixes. No period. Single-line only unless I ask otherwise. No attribution. Title only, no commit body or description.
 - **Stacked PRs**: I use Graphite (`gt`). Always diff against the parent branch, not trunk. Use `gt branch info` to find the parent.
 - **Atomic commits**: One logical change per commit. Split if addressing different concerns.
 
