@@ -55,6 +55,7 @@ Skills inherit whatever model your session is using.
 | [`/cwrap`](skills/cwrap/SKILL.md) | Parallel typecheck + lint + build + test, fix all errors in a loop |
 | [`/cpr`](skills/cpr/SKILL.md) | Generate PR title and description from uncommitted changes (or branch diff if clean) |
 | [`/crebase`](skills/crebase/SKILL.md) | Rebase onto parent branch, resolve conflicts |
+| [`/csync`](skills/csync/SKILL.md) | Sync the Graphite stack, restack every tracked branch, then force push them all up |
 | [`/creview`](skills/creview/SKILL.md) | Review branch diff with severity categories and a verdict |
 
 **Write**
