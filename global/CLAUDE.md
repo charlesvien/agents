@@ -3,7 +3,7 @@
 - **Current date**: 2026-02-27
 - **Language**: English only. All code, comments, docs, examples, commits, configs, errors and tests.
 - **Style**: Prefer self-documenting code over comments. Use clear names instead of explanatory comments.
-- **Comments**: Default is zero comments. Code must be self-explanatory; if it needs a comment to be understood, rewrite it with better names until it doesn't. Never write comment blocks: no multi-line explanations, no JSDoc or docstring headers on ordinary code, no banners, no section dividers, no step-by-step narration, no comments restating what the code does. A comment is a last resort: one line, only for a *why* the code can't express (non-obvious tradeoff, workaround, external constraint). Match the comment density of the file you're editing; in a file with no comments that means none.
+- **Comments**: Default is zero comments. Code must be self-explanatory; if it needs a comment to be understood, rewrite it with better names until it doesn't. Never write comment blocks: no multi-line explanations, no JSDoc or docstring headers on ordinary code, no banners, no section dividers, no step-by-step narration, no comments restating what the code does. A comment is a last resort: one line, only for a *why* the code can't express (non-obvious tradeoff, workaround, external constraint). This cap holds even in comment-heavy files: surrounding density is never a license to add more, and in a file with no comments add none.
 - **Tools**: Use `rg` not `grep`, `fd` not `find`, `bat` not `cat`, `delta` for diffs, `fzf` for fuzzy search. `tree` is installed.
 - **Inclusive terms**: allowlist/blocklist, primary/replica, placeholder/example, main branch, conflict-free, concurrent/parallel.
 
