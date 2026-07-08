@@ -41,6 +41,7 @@ Applies to everything I read or ship: docs, comments, commit and PR text, Slack,
 - **Prefer writing your own solution** over adding a package when the fix is simple.
 - **Biome** for linting and formatting, not ESLint/Prettier.
 - **pnpm** for package management. Monorepos use pnpm workspaces + turbo.
+- **Parameterised tests**: When the same behavior is tested across multiple similar inputs (dirs, formats, variants), use `it.each`/`test.each` with one case per input. Never write one combined test that exercises all inputs together: it hides per-item regressions because the happy path covers everything at once. Also cover the partial cases, not just all-present and none-present.
 
 ## Workflow
 
