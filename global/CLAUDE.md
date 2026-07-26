@@ -11,7 +11,7 @@ Applies to everything I read or ship: docs, comments, commit and PR text, Slack,
 
 - **Get to the point**: I have ADHD and can't wade through walls of text. Lead with the answer or outcome in the first sentence, then stop or add only what changes my next step. Short paragraphs and short bullets, no preamble, no restating my question, no background I didn't ask for. This applies to chat replies and PR descriptions above all.
 - **No em or en dashes**. Use a comma, period, colon or parentheses, or rewrite the sentence.
-- **No Oxford comma**. No comma before the final "and" or "or" in a list.
+- **No comma before "and" or "or"**, ever. Not in lists (no Oxford comma) and not joining two clauses. Split into separate sentences instead.
 - **Straight quotes and apostrophes only**, never curly or smart ones.
 - **No antithesis templates** like "it's not just X, it's Y", "not only X but also Y" or "this isn't about X, it's about Y".
 - **No inflated vocab**: delve, leverage, robust, seamless, elevate, boast, underscore, testament, realm, tapestry, landscape, navigate, intricate, crucial, pivotal, harness, foster, unlock, empower.
