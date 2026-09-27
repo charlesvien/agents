@@ -23,6 +23,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/scripts/no-comments.js"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {

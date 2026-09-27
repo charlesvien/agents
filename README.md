@@ -87,6 +87,7 @@ Configured in [`global/settings.json`](global/settings.json):
 | Hook | Event | What it does |
 |---|---|---|
 | [`suggest-compact.js`](scripts/suggest-compact.js) | PreToolUse (Edit/Write) | Counts tool calls per session, suggests `/compact` after 50 calls and every 25 after |
+| [`no-comments.js`](scripts/no-comments.js) | PostToolUse (Edit/Write/MultiEdit) | Flags newly added code comments back to Claude (and subagents) and tells it to delete them. Lint and type directives like `@ts-expect-error` or `biome-ignore` pass |
 
 ## Status line
 
