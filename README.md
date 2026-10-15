@@ -37,6 +37,7 @@ brew install ripgrep fd bat git-delta fzf
 | Skill | What it does |
 |---|---|
 | [`/coffice`](skills/coffice/SKILL.md) | YC-style office hours: pressure test an idea with forcing questions, then produce a design doc |
+| [`/cstandup`](skills/cstandup/SKILL.md) | List PRs merged since the last standup, copied as rich text for a Slack canvas |
 | [`/creview`](skills/creview/SKILL.md) | Review the branch diff or a PR URL with severity categories and a verdict |
 | [`/cdocs`](skills/cdocs/SKILL.md) | Write or edit posthog.com docs following the PostHog docs style guide |
 | [`/cuiflash`](skills/cuiflash/SKILL.md) | Fix SPAs/SSR apps that flash the wrong UI before client-side data resolves |
