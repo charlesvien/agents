@@ -47,6 +47,12 @@ brew install ripgrep fd bat tree git-delta fzf
 
 Skills inherit whatever model your session is using.
 
+**Think**
+
+| Skill | What it does |
+|---|---|
+| [`/coffice`](skills/coffice/SKILL.md) | YC-style office hours: pressure test an idea with forcing questions, then produce a design doc |
+
 **Ship**
 
 | Skill | What it does |
@@ -124,3 +130,4 @@ Configured in [`global/settings.json`](global/settings.json):
 - Environment variable tweaks (`CLAUDE_CODE_DISABLE_1M_CONTEXT`, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING`, `CLAUDE_CODE_DISABLE_AUTO_MEMORY`, `CLAUDE_CODE_SUBAGENT_MODEL`) from [@kunchenguid](https://x.com/kunchenguid/status/2043511416448307378)
 - Some skills and agents adapted from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) by [@affaan-m](https://github.com/affaan-m)
 - `/cuiflash` copied from [no-ui-flash](https://github.com/RhysSullivan/skills/blob/main/skills/no-ui-flash/SKILL.md) by [@RhysSullivan](https://github.com/RhysSullivan)
+- `/coffice` adapted from [gstack's office-hours](https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md) by [@garrytan](https://github.com/garrytan), with the gstack framework stripped out

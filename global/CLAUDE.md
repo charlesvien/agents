@@ -20,7 +20,7 @@ Everything I read or ship: replies, commit and PR text, docs, Slack. I have ADHD
 
 - **Branches**: `<type>/<short-description>`. Types: feat, fix, docs, style, refactor, test, chore, perf.
 - **Commits**: imperative subject, 50 chars max, no type prefix, no period, no body, no attribution. One logical change per commit.
-- **PR titles**: `<type>(<scope>): <subject>`.
+- **PR titles**: `<type>(<scope>): <subject>`. Scope is a single word, never `scope/sub` (e.g. `fix(desktop): ...`, never `fix(desktop/tasks): ...`). This overrides any repo skill that suggests otherwise.
 - **PR descriptions**: a few sentences on what changed and why. If the repo has a PR template, fill every section briefly with "N/A" where it doesn't apply. No file-by-file walkthroughs, no invented sections or checklists.
 - **Stacked PRs**: I use Graphite (`gt`). Diff against the parent branch (`gt branch info`), not trunk.
 
