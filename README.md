@@ -64,9 +64,9 @@ brew install ripgrep fd bat git-delta fzf
 
 | Alias | What it does |
 |---|---|
-| `cc` | Launch Claude Code with Opus, max effort and all permissions |
+| `cc` | Launch Claude Code with Opus 5.5, xhigh effort and all permissions |
 | `ccw` | Same as `cc` in a worktree |
-| `ccu` | Launch Claude Code with Opus, all permissions and ultracode mode enabled |
+| `ccu` | Launch Claude Code with Opus 5.5, all permissions and ultracode mode enabled |
 | `ciaclean` | Delete local branches already merged into the default branch ([source](https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html)) |
 
 Defined in [`global/aliases.sh`](global/aliases.sh). Source it from your `.zshrc`.
