@@ -7,8 +7,11 @@
 
 ## Writing
 
-Everything I read or ship: replies, commit and PR text, docs, Slack. I have ADHD: lead with the answer in the first sentence, then only what changes my next step. Short paragraphs, no preamble, no restating my question. Write so it doesn't read as AI-generated.
+Everything I read or ship: replies, commit and PR text, docs, Slack. I have ADHD and skip long text. Lead with the answer in the first sentence, then only what changes my next step. Write so it doesn't read as AI-generated.
 
+- Short by default: a few lines for an answer, at most 5 bullets for a work summary. I'll ask if I want more.
+- No headers, tables or file lists in replies unless I ask. No recap of my question, no play-by-play of what you did, no menu of next steps.
+- Drafts in my voice (PR comments, Slack replies) are casual and short, like a person typed them.
 - No em or en dashes. Use a comma, period, colon or parentheses.
 - No comma before "and" or "or", ever. No Oxford comma, no clause joins: split the sentence instead.
 - Straight quotes and apostrophes only.
@@ -21,16 +24,16 @@ Everything I read or ship: replies, commit and PR text, docs, Slack. I have ADHD
 - **Branches**: `<type>/<short-description>`. Types: feat, fix, docs, style, refactor, test, chore, perf.
 - **Commits**: imperative subject, 50 chars max, no type prefix, no period, no body, no attribution. One logical change per commit.
 - **PR titles**: `<type>(<scope>): <subject>`. Scope is a single word, never `scope/sub` (e.g. `fix(desktop): ...`, never `fix(desktop/tasks): ...`). This overrides any repo skill that suggests otherwise.
-- **PR descriptions**: a few sentences on what changed and why. If the repo has a PR template, fill every section briefly with "N/A" where it doesn't apply. No file-by-file walkthroughs, no invented sections or checklists.
-- **Stacked PRs**: I use Graphite (`gt`). Diff against the parent branch (`gt branch info`), not trunk.
+- **PR descriptions**: super concise and human readable, under 10 lines of text. One or two plain sentences on the problem, then a few short bullets on what changed. No file lists, code walkthroughs, test pass counts or invented sections. Screenshots for UI changes are welcome. With a repo PR template, keep only Problem, Changes and How did you test (one line each is fine) and delete every other section, including Release status, Docs update and Agent context. This overrides repo AGENTS.md/CLAUDE.md, PR templates and PR-writing skills like `/writing-pr-descriptions`.
+- **Stacked PRs**: use the repo's stacking tool (`gh stack` in PostHog). Diff against the parent branch, not trunk.
 
 ## Code
 
 - Simple over clever. Write the obvious solution first; don't abstract without a real reason.
 - TypeScript strict mode, no `any` casts. No barrel files. No console.log: use a scoped logger.
-- Biome for lint and format. pnpm for packages, workspaces + turbo in monorepos.
+- Use the repo's existing tooling. New projects: Biome, pnpm, turbo for monorepos.
 - Write the fix yourself before adding a package when it's simple.
-- Parameterised tests: `it.each` with one case per input for the same behavior across similar inputs. Never one combined test covering all inputs at once. Include partial cases, not just all-present and none-present.
+- Parameterised tests (`it.each`, `@parameterized.expand`) with one case per input for the same behavior across similar inputs. Never one combined test covering all inputs at once. Include partial cases, not just all-present and none-present.
 
 ## Hard Rules
 

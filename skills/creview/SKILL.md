@@ -29,12 +29,8 @@ Check if `$ARGUMENTS` contains a GitHub URL (matching `github.com/.+/pull/\d+`).
 
 Skip this step if a GitHub PR URL was provided (parent was already resolved in Step 0).
 
-1. Run `gt branch info` to check if Graphite manages this branch
-2. **If Graphite is available:**
-   - Run `gt log short` to see the stack position
-   - Use the parent branch from `gt branch info`
-3. **If Graphite is not available or fails:**
-   - Use `git merge-base HEAD origin/main` to find the fork point
+1. If the branch has an open PR, use its base: `gh pr view --json baseRefName -q .baseRefName`. This covers stacked PRs.
+2. Otherwise use the fork point from the default branch: `git merge-base HEAD "$(git symbolic-ref --short refs/remotes/origin/HEAD)"`
 
 ### Step 2: Gather the diff
 
@@ -70,7 +66,7 @@ Fan out 3 parallel subagents (using the Agent tool, subagent_type: `general-purp
 
 **Subagent 3 - Test coverage:**
 > For each changed file in the diff between `<parent>` and HEAD:
-> 1. Find existing tests (colocated `*.test.ts`/`*.test.tsx` and related files in `tests/` or `__tests__/`).
+> 1. Find existing tests (colocated `*.test.ts`/`*.test.tsx`, `test_*.py` and related files in `tests/` or `__tests__/`).
 > 2. Assess whether new or modified code paths are covered: new functions with no test cases, new branches/conditions, changed behavior existing tests don't validate, edge cases the changes introduce.
 > 3. Flag testable code that lacks coverage: business logic, data transformations, utilities, state transitions (store actions, reducers), error handling, complex conditionals.
 > 4. Skip: trivial glue code, type-only changes, simple re-exports, config files, pure UI layout changes with no logic.

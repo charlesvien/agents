@@ -3,27 +3,15 @@
     "commit": "",
     "pr": ""
   },
-  "model": "opus",
-  "effortLevel": "high",
+  "model": "opus[1m]",
+  "effortLevel": "xhigh",
   "env": {
-    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
     "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
   },
   "skipDangerousModePermissionPrompt": true,
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ~/.claude/scripts/suggest-compact.js"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",
@@ -83,6 +71,7 @@
       "Bash(stat *)",
       "Bash(du *)",
       "Bash(readlink *)"
-    ]
+    ],
+    "defaultMode": "auto"
   }
 }
