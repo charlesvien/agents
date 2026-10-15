@@ -36,6 +36,16 @@ gh search prs --author @me --merged --merged-at ">=<since>" --repo PostHog/posth
 
 Sort by `closedAt` (the merge time), oldest first. If there are none, say "No PRs merged since <day and time PT>" and stop.
 
+Build a GitHub search link for the same PRs. Use the real login, not `@me`, so teammates opening the canvas see the user's PRs instead of their own:
+
+```bash
+python3 -c '
+import sys, urllib.parse
+q = f"is:pr author:{sys.argv[1]} is:merged merged:>={sys.argv[2]} repo:PostHog/posthog repo:PostHog/ai-gateway"
+print("https://github.com/search?type=pullrequests&q=" + urllib.parse.quote_plus(q))
+' "$(gh api user --jq .login)" <since>
+```
+
 ### Step 3: Write one line per PR
 
 Read each PR's title and body. Write one plain sentence, under 15 words, on what changed and why it matters. No conventional-commit prefix, no file names, no dashes, no trailing period.
@@ -46,8 +56,8 @@ Then write a recap: one plain sentence, under 25 words, naming the high level pu
 
 Make a temp dir with `mktemp -d` and write two files into it:
 
-- `standup.html`: `<p><recap></p>` then `<ol>` with one `<li><a href="<url>">PR</a> <sentence></li>` per PR. Escape `&`, `<` and `>` in all text.
-- `standup.md`: the recap, a blank line, then `1. [PR](<url>) <sentence>` per line, as the plain text fallback.
+- `standup.html`: `<p><recap></p>`, then `<p><a href="<search link>">View all on GitHub</a></p>`, then `<ol>` with one `<li><a href="<url>">PR</a> <sentence></li>` per PR. Escape `&`, `<` and `>` in all text and `&` in hrefs.
+- `standup.md`: the recap, `[View all on GitHub](<search link>)`, then `1. [PR](<url>) <sentence>` per line, each block separated by a blank line. This is the plain text fallback.
 
 Then copy both to the clipboard:
 
@@ -57,4 +67,4 @@ osascript -l JavaScript ~/.claude/skills/cstandup/clipboard.js <dir>/standup.htm
 
 ### Step 5: Output
 
-Print the recap and the markdown list, then one line: `Copied to clipboard, paste into the canvas.` Nothing else.
+Print the contents of `standup.md`, then one line: `Copied to clipboard, paste into the canvas.` Nothing else.
