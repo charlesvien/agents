@@ -40,12 +40,14 @@ Sort by `closedAt` (the merge time), oldest first. If there are none, say "No PR
 
 Read each PR's title and body. Write one plain sentence, under 15 words, on what changed and why it matters. No conventional-commit prefix, no file names, no dashes, no trailing period.
 
+Then write a recap: one plain sentence, under 25 words, naming the high level push or theme across the PRs (e.g. "Mostly hardening cloud task runs, plus some CI cleanup"). Same style rules.
+
 ### Step 4: Copy to the clipboard
 
 Make a temp dir with `mktemp -d` and write two files into it:
 
-- `standup.html`: `<ol>` with one `<li><a href="<url>">PR</a> <sentence></li>` per PR. Escape `&`, `<` and `>` in sentences.
-- `standup.md`: `1. [PR](<url>) <sentence>` per line, as the plain text fallback.
+- `standup.html`: `<p><recap></p>` then `<ol>` with one `<li><a href="<url>">PR</a> <sentence></li>` per PR. Escape `&`, `<` and `>` in all text.
+- `standup.md`: the recap, a blank line, then `1. [PR](<url>) <sentence>` per line, as the plain text fallback.
 
 Then copy both to the clipboard:
 
@@ -55,4 +57,4 @@ osascript -l JavaScript ~/.claude/skills/cstandup/clipboard.js <dir>/standup.htm
 
 ### Step 5: Output
 
-Print the markdown list, then one line: `Copied to clipboard, paste into the canvas.` Nothing else.
+Print the recap and the markdown list, then one line: `Copied to clipboard, paste into the canvas.` Nothing else.
