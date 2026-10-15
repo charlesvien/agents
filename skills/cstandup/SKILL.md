@@ -1,6 +1,6 @@
 ---
 name: cstandup
-description: List my PRs merged since the last standup (Mon/Wed/Fri 8:30 AM PT) as a numbered list with linked "PR" text, copied to the clipboard for a Slack canvas
+description: List my PostHog/posthog and PostHog/ai-gateway PRs merged since the last standup (Mon/Wed/Fri 8:30 AM PT) as a numbered list with linked "PR" text, copied to the clipboard for a Slack canvas
 disable-model-invocation: true
 allowed-tools: Bash, Write
 argument-hint: "[start date or day, defaults to the last standup]"
@@ -31,10 +31,10 @@ If `$ARGUMENTS` names a different start (a date or a day like "monday"), use 8:3
 ### Step 2: Fetch merged PRs
 
 ```bash
-gh search prs --author @me --merged --merged-at ">=<since>" --limit 100 --json number,title,url,repository,closedAt,body
+gh search prs --author @me --merged --merged-at ">=<since>" --repo PostHog/posthog --repo PostHog/ai-gateway --limit 100 --json number,title,url,repository,closedAt,body
 ```
 
-This covers every repo. Sort by `closedAt` (the merge time), oldest first. If there are none, say "No PRs merged since <day and time PT>" and stop.
+Sort by `closedAt` (the merge time), oldest first. If there are none, say "No PRs merged since <day and time PT>" and stop.
 
 ### Step 3: Write one line per PR
 
