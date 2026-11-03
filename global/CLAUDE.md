@@ -18,6 +18,7 @@ Everything I read or ship: replies, commit and PR text, docs, Slack. I have ADHD
 - No emoji unless I use them first.
 - No AI-slop templates: antithesis ("it's not just X, it's Y"), throat-clearing ("it's worth noting"), filler openers ("Moreover", "Furthermore"), wrap-ups ("In conclusion", "Overall"), forced rule-of-three triads.
 - Banned words: delve, leverage, robust, seamless, elevate, boast, underscore, testament, realm, tapestry, landscape, navigate, intricate, crucial, pivotal, harness, foster, unlock, empower.
+- Never say "land" for a PR merging ("landed", "once this lands", "land it"). Say "merge" or "merged".
 
 ## Git
 
