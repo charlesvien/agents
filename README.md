@@ -13,10 +13,10 @@ cd agents
 ./scripts/install.sh
 ```
 
-The install script symlinks skills and scripts into `~/.claude/` and prunes links to anything removed from this repo. It does **not** touch [`settings.json`](global/settings.json) or [`CLAUDE.md`](global/CLAUDE.md) since those are personal. Paste this into Claude Code to compare them with yours and pick what to adopt:
+The install script symlinks skills and scripts into `~/.claude/` and prunes links to anything removed from this repo. It also links the global rules in [`AGENTS.md`](global/AGENTS.md) to `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`, skipping any file you already have. It does **not** touch [`settings.json`](global/settings.json) since that's personal. Paste this into Claude Code to compare the rules and settings with yours and pick what to adopt:
 
 ```
-Read the CLAUDE.md and settings.json from the agents repo I just
+Read the AGENTS.md and settings.json from the agents repo I just
 cloned. Then read my current ~/.claude/CLAUDE.md and
 ~/.claude/settings.json (create them if they don't exist).
 Compare them side by side. For each rule or setting I'm missing,
@@ -26,7 +26,7 @@ ones to add. Apply only what I choose.
 
 ## Dependencies
 
-The CLAUDE.md tells Claude to use these instead of the defaults:
+The AGENTS.md tells your agent to use these instead of the defaults:
 
 ```bash
 brew install ripgrep fd bat git-delta fzf

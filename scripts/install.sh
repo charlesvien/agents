@@ -8,7 +8,7 @@ YELLOW='\033[33m'
 DIM='\033[2m'
 RESET='\033[0m'
 
-mkdir -p ~/.claude/skills ~/.claude/scripts
+mkdir -p ~/.claude/skills ~/.claude/scripts ~/.codex
 
 new=0
 existing=0
@@ -43,7 +43,7 @@ link_item() {
 }
 
 echo ""
-echo "  Linking skills and scripts into ~/.claude/"
+echo "  Linking skills, scripts and global rules"
 echo ""
 
 for link in "$HOME"/.claude/skills/* "$HOME"/.claude/agents/* "$HOME"/.claude/scripts/*; do
@@ -72,6 +72,9 @@ done
 
 # statusline lives at the top level since settings.json points to ~/.claude/statusline.sh
 link_item "$SCRIPT_DIR/scripts/statusline.sh" "$HOME/.claude/statusline.sh" "statusline.sh" "statusline"
+
+link_item "$SCRIPT_DIR/global/AGENTS.md" "$HOME/.claude/CLAUDE.md" "CLAUDE.md" "rules"
+link_item "$SCRIPT_DIR/global/AGENTS.md" "$HOME/.codex/AGENTS.md" "AGENTS.md" "rules"
 
 echo ""
 if [ $new -gt 0 ]; then
