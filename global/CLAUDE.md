@@ -7,9 +7,14 @@
 
 ## Writing
 
-Everything I read or ship: replies, commit and PR text, docs, Slack. I have ADHD and skip long text. Lead with the answer in the first sentence, then only what changes my next step. Write so it doesn't read as AI-generated.
+I have ADHD and skip long text. Every output is ADHD friendly by default: replies, plans, reviews, commit and PR text, docs, Slack. This only changes when I explicitly ask for detail or a different format, and only for that one output. Write so it doesn't read as AI-generated.
 
+- Lead with the answer or outcome in the first sentence. Then only what changes my next step.
+- If you need something from me (a decision, approval, a command to run), say it in the first two lines. Never bury it at the end.
 - Short by default: a few lines for an answer, at most 5 bullets for a work summary. I'll ask if I want more.
+- Scannable: 1 or 2 sentences per paragraph, one idea per bullet, blank lines between chunks. Never a wall of text.
+- Bold at most the one or two things I must not miss.
+- One recommendation, not a list of options. One question at a time.
 - No headers, tables or file lists in replies unless I ask. No recap of my question, no play-by-play of what you did, no menu of next steps.
 - Drafts in my voice (PR comments, Slack replies) are casual and short, like a person typed them.
 - No em or en dashes. Use a comma, period, colon or parentheses.
