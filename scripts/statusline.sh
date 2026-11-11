@@ -1,5 +1,4 @@
 #!/bin/bash
-# Claude Code status line: model | git branch + change counts | context bar | cost | lines changed
 # Input schema: https://code.claude.com/docs/en/statusline
 
 export LC_ALL=C
@@ -13,6 +12,7 @@ GREEN=$'\033[32m'
 YELLOW=$'\033[33m'
 RED=$'\033[31m'
 MAGENTA=$'\033[35m'
+BLUE=$'\033[34m'
 SEP=" ${DIM}│${RESET} "
 
 # Unit separator as delimiter: unlike tab it is not IFS whitespace, so an
@@ -90,6 +90,12 @@ if [ -n "$CWD" ] && PORCELAIN=$(git --no-optional-locks -C "$CWD" status --porce
             GIT_SEG="${YELLOW}${BRANCH}${RESET}"
         else
             GIT_SEG="${GREEN}${BRANCH}${RESET}"
+        fi
+        if GIT_PATHS=$(git --no-optional-locks -C "$CWD" rev-parse --path-format=absolute --git-dir --git-common-dir --show-toplevel 2>/dev/null); then
+            { IFS= read -r GIT_DIR; IFS= read -r GIT_COMMON_DIR; IFS= read -r TOPLEVEL; } <<<"$GIT_PATHS"
+            if [ "$GIT_DIR" != "$GIT_COMMON_DIR" ]; then
+                GIT_SEG="${BLUE}${TOPLEVEL##*/}${RESET} ${DIM}(${RESET}${GIT_SEG}${DIM})${RESET}"
+            fi
         fi
         [ "$STAGED" -gt 0 ] && GIT_SEG+=" ${GREEN}+${STAGED}${RESET}"
         [ "$MODIFIED" -gt 0 ] && GIT_SEG+=" ${YELLOW}~${MODIFIED}${RESET}"
