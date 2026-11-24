@@ -1,53 +1,13 @@
 {
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "model": "opus[1m]",
-  "effortLevel": "xhigh",
   "env": {
     "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
+    "CLAUDE_CODE_SHELL": "bash"
   },
-  "skipDangerousModePermissionPrompt": true,
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ~/.claude/scripts/no-comments.js"
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh",
-    "padding": 0
-  },
-  "spinnerVerbs": {
-    "mode": "replace",
-    "verbs": [
-      "Curling into a ball",
-      "Snuffling around",
-      "Foraging for bugs",
-      "Rolling through hedgerows",
-      "Nibbling on mealworms",
-      "Waddling purposefully",
-      "Bristling with excitement",
-      "Burrowing into leaves",
-      "Scurrying through undergrowth",
-      "Unfurling cautiously",
-      "Sniffing out answers",
-      "Huffing and puffing",
-      "Nesting in code",
-      "Tumbling down hills",
-      "Quill-checking everything"
-    ]
+  "attribution": {
+    "commit": "",
+    "pr": ""
   },
   "permissions": {
     "allow": [
@@ -73,5 +33,82 @@
       "Bash(readlink *)"
     ],
     "defaultMode": "auto"
-  }
+  },
+  "model": "fable",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/scripts/no-comments.js"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-code-plugins": false,
+    "vercel@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
+    "runpod@runpod": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
+    },
+    "runpod": {
+      "source": {
+        "source": "github",
+        "repo": "runpod/runpod-plugins-official"
+      }
+    }
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Curling into a ball",
+      "Snuffling around",
+      "Foraging for bugs",
+      "Rolling through hedgerows",
+      "Nibbling on mealworms",
+      "Waddling purposefully",
+      "Bristling with excitement",
+      "Burrowing into leaves",
+      "Scurrying through undergrowth",
+      "Unfurling cautiously",
+      "Sniffing out answers",
+      "Huffing and puffing",
+      "Nesting in code",
+      "Tumbling down hills",
+      "Quill-checking everything"
+    ]
+  },
+  "syntaxHighlightingDisabled": false,
+  "effortLevel": "xhigh",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "switchModelsOnFlag": false,
+  "remoteControlAtStartup": false,
+  "voiceEnabled": true
 }
