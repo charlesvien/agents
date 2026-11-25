@@ -44,7 +44,7 @@ Match how he actually writes standup. Look at his recent entries in the canvas f
 - **Merged work:** one bullet summarising what merged in plain words. PR links optional; skip them when there are several small cleanups.
 - **New work not yet reviewed:** group under one parent bullet `will be ready for review today:` with a sub-bullet per piece, each saying what changes for users of the system, then the PR links.
 - **Conversations and non-PR work:** one bullet, e.g. `chatting with other teams to understand what their plans are and how we can best support them`.
-- **Leave out:** anything already in his Topics for that day, reviews he did of other people's PRs, small refactors, and anything from before the last standup that he already reported.
+- **Leave out:** anything already in his Topics or his Standup entry for that day, reviews he did of other people's PRs, small refactors, and anything from before the last standup that he already reported.
 
 Example of the target shape:
 
@@ -61,7 +61,10 @@ Example of the target shape:
 
 ### Deliver
 
-- Reply with the notes block first, ready to paste. Nothing above it.
-- After the block, at most three short lines for things he should know before standup: a stale review waiting on him, a promised follow-up with no written trace, an unanswered ask in the team channel, a wrong date on the canvas entry. Skip the section if there is nothing.
+- The canvas does not render pasted markdown. `[text](url)` stays literal, and text copied from the terminal breaks a bullet at every wrapped line. So put the entry on the clipboard as rich text, where links paste as real links:
+  1. Write the bullets as an HTML fragment to a file in the scratchpad: one `<ul>` of `<li>`, a nested `<ul>` for sub-bullets, `<a href>` for links, `<code>` for code. If the canvas already has his `[Charles]` entry for that day, write only the new bullets. Otherwise make `[Charles]` the single top `<li>` with the bullets nested under it.
+  2. Run `osascript -l JavaScript ~/.claude/skills/cstandup/copy-rich.js <file>` and check it prints `copied as rich text`.
+- Reply with the entry first, as normal markdown and not in a code fence, so the links render in the terminal. Nothing above it. Then one line saying it is on the clipboard, ready to paste into the canvas.
+- After the entry, at most three short lines for things he should know before standup: a stale review waiting on him, a promised follow-up with no written trace, an unanswered ask in the team channel, a wrong date on the canvas entry. Skip the section if there is nothing.
 - Say plainly if something is an assumption (e.g. "merging today").
 - Do not edit the canvas unless he asks. If he does, add the entry under **Standup:** in the newest dated section, and leave other people's entries alone.
